@@ -1,6 +1,7 @@
 import { Repository, EntityRepository } from 'typeorm';
 import { Cocktail } from './cocktail.entity';
 import { CreateCocktailDto } from './dto/createCocktail.dto';
+import { CocktailType } from './cocktailtype.enum';
 
 @EntityRepository(Cocktail)
 export class CocktailRepository extends Repository<Cocktail> {
@@ -13,6 +14,7 @@ export class CocktailRepository extends Repository<Cocktail> {
 
   async createCocktails(
     createCocktailDto: CreateCocktailDto,
+    cocktailType: CocktailType,
   ): Promise<Cocktail> {
     const cocktail = new Cocktail();
 
@@ -21,7 +23,7 @@ export class CocktailRepository extends Repository<Cocktail> {
     cocktail.description = createCocktailDto.description;
     cocktail.ingredients = createCocktailDto.ingredients;
     cocktail.directions = createCocktailDto.directions;
-    cocktail.type = createCocktailDto.type;
+    cocktail.type = cocktailType;
 
     await cocktail.save();
     return cocktail;
