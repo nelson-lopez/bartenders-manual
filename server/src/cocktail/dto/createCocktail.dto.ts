@@ -1,5 +1,4 @@
-import { IsNotEmpty, IsIn } from 'class-validator';
-import { CocktailType } from '../cocktailtype.enum';
+import { IsNotEmpty } from 'class-validator';
 
 export class CreateCocktailDto {
   @IsNotEmpty()
