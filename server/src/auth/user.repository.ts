@@ -1,4 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 import { User } from './user.entity';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import {
@@ -12,8 +13,13 @@ export class UserRepository extends Repository<User> {
     const newUser = new User();
     const { username, password } = authCredentialsDto;
 
+    newUser.salt = await bcrypt.genSalt();
     newUser.username = username;
-    newUser.password = password;
+
+    /// making sure we append a new hashed password before saving user
+    newUser.password = await this.hashPassword(password, newUser.salt);
+
+    /// Throw an error if user name  already exist beforehand
 
     try {
       await newUser.save();
@@ -24,5 +30,24 @@ export class UserRepository extends Repository<User> {
         throw new InternalServerErrorException();
       }
     }
+  }
+
+  /// validate user password
+
+  async validatUserPassword(
+    authCredentialsDto: AuthCredentialsDto,
+  ): Promise<string> {
+    const { username, password } = authCredentialsDto;
+    const user = await this.findOne({ username });
+
+    if (user && user.validatePassword(password)) {
+      return user.username;
+    } else {
+      return null;
+    }
+  }
+
+  private async hashPassword(password: string, salt: string): Promise<string> {
+    return bcrypt.hash(password, salt);
   }
 }
