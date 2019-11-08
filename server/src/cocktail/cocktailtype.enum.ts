@@ -1,7 +1,7 @@
 export enum CocktailType {
   Champagne_Cocktail = 'Champagne Cocktail',
   Shaken = 'Shaken',
-  Sour = 'Sour',
+  Dessert_Cocktail = 'Dessert Cocktail',
   Smash = 'Sour',
   Swizzle = 'Swizzle',
   Stirred = 'Stirred',
