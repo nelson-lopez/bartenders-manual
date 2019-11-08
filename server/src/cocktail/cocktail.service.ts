@@ -31,21 +31,6 @@ export class CocktailService {
   updateCockTail(id: number, updateCocktailDto: CreateCocktailDto) {
     return this.cocktailRepository.updateCocktail(id, updateCocktailDto);
   }
-  // async updateCocktail(
-  //   id: number,
-  //   createCocktailDto: CreateCocktailDto,
-  //   cocktailType: CocktailType,
-  // ): Promise<Cocktail> {
-  //   const cocktail = await this.getCocktailById(id);
-  //   cocktail.photo_url = createCocktailDto.photo_url;
-  //   cocktail.name = createCocktailDto.name;
-  //   cocktail.description = createCocktailDto.description;
-  //   cocktail.ingredients = createCocktailDto.ingredients;
-  //   cocktail.directions = createCocktailDto.directions;
-  //   cocktail.type = cocktailType;
-  //   await cocktail.save();
-  //   return cocktail;
-  // }
 
   createCocktail(
     createCocktailDto: CreateCocktailDto,
