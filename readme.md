@@ -4,8 +4,8 @@
 
 | Day   | Deliverable                             | Status     |
 | ----- | --------------------------------------- | ---------- |
-| Day 1 | Scaffolding REST Backend                | Incomplete |
-| Day 2 | Functioning Crud                        | Incomplete |
+| Day 1 | Scaffolding REST Backend                | Done |
+| Day 2 | Functioning Crud                        | Done |
 | Day 3 | Stretch goal Auth/ Scaffolding Frontend | Incomplete |
 | Day 4 | Rendering Frontend functionality        | Incomplete |
 | Day 5 | Styling Frontend                        | Incomplete |
@@ -46,7 +46,7 @@ F: Add styling
 - User authentication
 - GraphQL for Query endpoints
 - Image upload
-- Exapnd cocktail models further down to have sub family properties ei: Shaken: is_sour: true
+- Exapnd cocktail models further down to have sub family properties ei: Shaken: is_buck: true
 
 ## Architectural Design
 
@@ -75,8 +75,8 @@ These models will change in the future and become much more expansive as the pro
 
 | Component                             | Priority | Estimated Time | Actual Time |
 | ------------------------------------- | :------: | :------------: | :---------: |
-| API scaffolding                       |    H     |      3hrs      |             |
-| Fully fleshing out endpoints          |    H     |     10hrs      |             |
+| API scaffolding                       |    H     |      3hrs      |      1hrs   |
+| Fully fleshing out endpoints          |    H     |     10hrs      |       4hrs  |
 | Scaffolding Frontend                  |    H     |      3hrs      |             |
 | Rendering data to frontend            |    H     |     10hrs      |             |
 | Styling frontend                      |    H     |     14hrs      |             |
