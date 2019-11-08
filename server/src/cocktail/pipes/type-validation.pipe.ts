@@ -2,6 +2,8 @@ import { PipeTransform, BadRequestException } from '@nestjs/common';
 import { CocktailType } from '../cocktailtype.enum';
 
 export class CocktailTypeValidationPipe implements PipeTransform {
+  /// importing cocktails enum
+  /// applying enum to nestjs pipe for request validation
   readonly allowedTypes = [
     CocktailType.Champagne_Cocktail,
     CocktailType.Dessert_Cocktail,

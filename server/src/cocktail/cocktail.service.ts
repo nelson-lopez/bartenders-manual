@@ -56,6 +56,7 @@ export class CocktailService {
 
   async deleteCocktail(id: number): Promise<void> {
     const result = await this.cocktailRepository.delete(id);
+    //// Checking for our result to return a proper delete response
     if (result.affected === 0) {
       throw new NotFoundException(`This cocktail ${id} is not valid!!`);
     }
