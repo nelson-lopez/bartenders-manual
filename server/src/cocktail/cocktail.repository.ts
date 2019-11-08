@@ -2,6 +2,7 @@ import { Repository, EntityRepository } from 'typeorm';
 import { Cocktail } from './cocktail.entity';
 import { CreateCocktailDto } from './dto/createCocktail.dto';
 import { CocktailType } from './cocktailtype.enum';
+import { NotAcceptableException } from '@nestjs/common';
 
 @EntityRepository(Cocktail)
 export class CocktailRepository extends Repository<Cocktail> {
@@ -33,6 +34,32 @@ export class CocktailRepository extends Repository<Cocktail> {
     cocktail.type = cocktailType;
 
     await cocktail.save();
+    return cocktail;
+  }
+
+  async updateCocktail(id: number, updateCocktailDto: CreateCocktailDto) {
+    const cocktail = await this.findOne(id);
+    const {
+      photo_url,
+      name,
+      description,
+      ingredients,
+      directions,
+      type,
+    } = updateCocktailDto;
+
+    if (!cocktail) {
+      throw new NotAcceptableException(`Cocktail with ${id} not found!`);
+    }
+    cocktail.photo_url = photo_url;
+    cocktail.name = name;
+    cocktail.description = description;
+    cocktail.ingredients = ingredients;
+    cocktail.directions = directions;
+    cocktail.type = type;
+
+    await cocktail.save();
+
     return cocktail;
   }
 }

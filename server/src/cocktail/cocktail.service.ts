@@ -28,21 +28,24 @@ export class CocktailService {
     return cocktail;
   }
 
-  async updateCocktail(
-    id: number,
-    createCocktailDto: CreateCocktailDto,
-    cocktailType: CocktailType,
-  ): Promise<Cocktail> {
-    const cocktail = await this.getCocktailById(id);
-    cocktail.photo_url = createCocktailDto.photo_url;
-    cocktail.name = createCocktailDto.name;
-    cocktail.description = createCocktailDto.description;
-    cocktail.ingredients = createCocktailDto.ingredients;
-    cocktail.directions = createCocktailDto.directions;
-    cocktail.type = cocktailType;
-
-    return cocktail;
+  updateCockTail(id: number, updateCocktailDto: CreateCocktailDto) {
+    return this.cocktailRepository.updateCocktail(id, updateCocktailDto);
   }
+  // async updateCocktail(
+  //   id: number,
+  //   createCocktailDto: CreateCocktailDto,
+  //   cocktailType: CocktailType,
+  // ): Promise<Cocktail> {
+  //   const cocktail = await this.getCocktailById(id);
+  //   cocktail.photo_url = createCocktailDto.photo_url;
+  //   cocktail.name = createCocktailDto.name;
+  //   cocktail.description = createCocktailDto.description;
+  //   cocktail.ingredients = createCocktailDto.ingredients;
+  //   cocktail.directions = createCocktailDto.directions;
+  //   cocktail.type = cocktailType;
+  //   await cocktail.save();
+  //   return cocktail;
+  // }
 
   createCocktail(
     createCocktailDto: CreateCocktailDto,
@@ -56,6 +59,7 @@ export class CocktailService {
 
   async deleteCocktail(id: number): Promise<void> {
     const result = await this.cocktailRepository.delete(id);
+    //// Checking for our result to return a proper delete response
     if (result.affected === 0) {
       throw new NotFoundException(`This cocktail ${id} is not valid!!`);
     }
