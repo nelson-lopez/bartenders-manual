@@ -1,5 +1,5 @@
 import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { CocktailType } from './dto/createCocktail.dto';
+import { CocktailType } from './cocktailtype.enum';
 
 @Entity()
 export class Cocktail extends BaseEntity {

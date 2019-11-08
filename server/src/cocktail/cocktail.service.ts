@@ -1,8 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  NotAcceptableException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CocktailRepository } from './cocktail.repository';
 import { Cocktail } from './cocktail.entity';
 import { CreateCocktailDto } from './dto/createCocktail.dto';
+import { CocktailType } from './cocktailtype.enum';
+import { tsImportEqualsDeclaration } from '@babel/types';
 
 @Injectable()
 export class CocktailService {
@@ -15,7 +21,44 @@ export class CocktailService {
     return this.cocktailRepository.getCocktails();
   }
 
-  createCocktail(createCocktailDto: CreateCocktailDto): Promise<Cocktail> {
-    return this.cocktailRepository.createCocktails(createCocktailDto);
+  getCocktailById(id: number): Promise<Cocktail> {
+    const cocktail = this.cocktailRepository.findOne(id);
+    if (!cocktail) {
+      throw new NotAcceptableException(`Cocktail with ${id} not found!`);
+    }
+    return cocktail;
+  }
+
+  async updateCocktail(
+    id: number,
+    createCocktailDto: CreateCocktailDto,
+    cocktailType: CocktailType,
+  ): Promise<Cocktail> {
+    const cocktail = await this.getCocktailById(id);
+    cocktail.photo_url = createCocktailDto.photo_url;
+    cocktail.name = createCocktailDto.name;
+    cocktail.description = createCocktailDto.description;
+    cocktail.ingredients = createCocktailDto.ingredients;
+    cocktail.directions = createCocktailDto.directions;
+    cocktail.type = cocktailType;
+
+    return cocktail;
+  }
+
+  createCocktail(
+    createCocktailDto: CreateCocktailDto,
+    cocktailType: CocktailType,
+  ): Promise<Cocktail> {
+    return this.cocktailRepository.createCocktails(
+      createCocktailDto,
+      cocktailType,
+    );
+  }
+
+  async deleteCocktail(id: number): Promise<void> {
+    const result = await this.cocktailRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`This cocktail ${id} is not valid!!`);
+    }
   }
 }
