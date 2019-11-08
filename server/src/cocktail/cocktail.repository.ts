@@ -17,12 +17,19 @@ export class CocktailRepository extends Repository<Cocktail> {
     cocktailType: CocktailType,
   ): Promise<Cocktail> {
     const cocktail = new Cocktail();
+    const {
+      photo_url,
+      name,
+      description,
+      ingredients,
+      directions,
+    } = createCocktailDto;
 
-    cocktail.photo_url = createCocktailDto.photo_url;
-    cocktail.name = createCocktailDto.name;
-    cocktail.description = createCocktailDto.description;
-    cocktail.ingredients = createCocktailDto.ingredients;
-    cocktail.directions = createCocktailDto.directions;
+    cocktail.photo_url = photo_url;
+    cocktail.name = name;
+    cocktail.description = description;
+    cocktail.ingredients = ingredients;
+    cocktail.directions = directions;
     cocktail.type = cocktailType;
 
     await cocktail.save();

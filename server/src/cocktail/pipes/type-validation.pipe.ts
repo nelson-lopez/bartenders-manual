@@ -4,7 +4,7 @@ import { CocktailType } from '../cocktailtype.enum';
 export class CocktailTypeValidationPipe implements PipeTransform {
   readonly allowedTypes = [
     CocktailType.Champagne_Cocktail,
-    CocktailType.Shaken,
+    CocktailType.Dessert_Cocktail,
     CocktailType.Smash,
     CocktailType.Stirred,
     CocktailType.Swizzle,
@@ -13,7 +13,7 @@ export class CocktailTypeValidationPipe implements PipeTransform {
   transform(value: any) {
     value = value.charAt(0).toUpperCase() + value.slice(1);
     if (!this.isTypeValid(value)) {
-      throw new BadRequestException(`"${value}" is an invalid cocktail type!`);
+      throw new BadRequestException(`${value} is an invalid cocktail type!`);
     }
     return value;
   }
