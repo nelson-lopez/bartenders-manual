@@ -27,12 +27,7 @@ This is a tool for browsing a catalog of drinks based off of a customers prefere
 
 ![](https://imgur.com/IqEjQDI.png)
 
-A: Working CRUD
-B: Working Frontend Functionality
-C: Apply searches to INDICO API & NYT API
-D: Render data using text
-E: Render data through Highcharts
-F: Add styling
+
 
 #### MVP
 
