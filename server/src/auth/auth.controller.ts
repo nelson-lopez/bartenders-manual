@@ -1,4 +1,12 @@
-import { Controller, Post, Body, ValidationPipe } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  ValidationPipe,
+  Param,
+  ParseIntPipe,
+  Patch,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 
@@ -9,6 +17,14 @@ export class AuthController {
   @Post('/signup')
   signUp(@Body(ValidationPipe) authCredentialsDto: AuthCredentialsDto) {
     return this.authService.signUp(authCredentialsDto);
+  }
+
+  @Patch(':id')
+  addCocktail(
+    @Param('id', ParseIntPipe) id: number,
+    @Body('cocktailId', ParseIntPipe) cocktailId: number,
+  ) {
+    return this.authService.addCocktail(id, cocktailId);
   }
 
   @Post('/signin')

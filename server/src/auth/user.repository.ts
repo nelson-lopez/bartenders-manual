@@ -1,4 +1,4 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { EntityRepository, Repository, getCustomRepository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { User } from './user.entity';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
@@ -6,6 +6,7 @@ import {
   ConflictException,
   InternalServerErrorException,
 } from '@nestjs/common';
+import { CocktailRepository } from 'src/cocktail/cocktail.repository';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
@@ -30,6 +31,15 @@ export class UserRepository extends Repository<User> {
         throw new InternalServerErrorException();
       }
     }
+  }
+
+  async addCocktail(id: number, cocktailId: number): Promise<User> {
+    const user = await this.findOne(id);
+    const cocktailRepository = getCustomRepository(CocktailRepository);
+    const cocktail = await cocktailRepository.findOne(cocktailId);
+    user.cocktails = cocktail;
+    user.save();
+    return user;
   }
 
   /// validate user password
