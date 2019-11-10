@@ -8,6 +8,7 @@ import {
   Patch,
   Delete,
   UseGuards,
+  Logger,
 } from '@nestjs/common';
 import { CocktailService } from './cocktail.service';
 import { CreateCocktailDto } from './dto/createCocktail.dto';
@@ -15,9 +16,13 @@ import { Cocktail } from './cocktail.entity';
 import { CocktailTypeValidationPipe } from './pipes/type-validation.pipe';
 import { CocktailType } from './cocktailtype.enum';
 import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from 'src/auth/get-user.decorator';
+import { User } from 'src/auth/user.entity';
 
 @Controller('cocktails')
 export class CocktailController {
+  private logger = new Logger('CocktailController');
+
   constructor(private cocktailService: CocktailService) {}
 
   @Get()
@@ -35,8 +40,10 @@ export class CocktailController {
   updateCocktail(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateCocktailDto: CreateCocktailDto,
+    @GetUser() user: User,
   ): Promise<Cocktail> {
-    return this.cocktailService.updateCockTail(id, updateCocktailDto);
+    this.logger.verbose(`User ${user.username} is updating cocktail`);
+    return this.cocktailService.updateCockTail(id, updateCocktailDto, user);
   }
 
   @UseGuards(AuthGuard())
@@ -45,13 +52,25 @@ export class CocktailController {
     @Body('type', CocktailTypeValidationPipe)
     cocktailType: CocktailType,
     @Body() createCockTailDto: CreateCocktailDto,
+    @GetUser() user: User,
   ): Promise<Cocktail> {
-    return this.cocktailService.createCocktail(createCockTailDto, cocktailType);
+    this.logger.verbose(
+      `User ${user.username} is creating ${createCockTailDto.name}`,
+    );
+    return this.cocktailService.createCocktail(
+      createCockTailDto,
+      cocktailType,
+      user,
+    );
   }
 
   @UseGuards(AuthGuard())
   @Delete('/:id')
-  deleteCocktail(@Param('id', ParseIntPipe) id: number): Promise<void> {
-    return this.cocktailService.deleteCocktail(id);
+  deleteCocktail(
+    @Param('id', ParseIntPipe) id: number,
+    @GetUser() user: User,
+  ): Promise<void> {
+    this.logger.verbose(`User ${user.username} deleted a cocktail`);
+    return this.cocktailService.deleteCocktail(id, user);
   }
 }

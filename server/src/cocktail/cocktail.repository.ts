@@ -3,6 +3,7 @@ import { Cocktail } from './cocktail.entity';
 import { CreateCocktailDto } from './dto/createCocktail.dto';
 import { CocktailType } from './cocktailtype.enum';
 import { NotAcceptableException } from '@nestjs/common';
+import { User } from 'src/auth/user.entity';
 
 @EntityRepository(Cocktail)
 export class CocktailRepository extends Repository<Cocktail> {
@@ -16,6 +17,7 @@ export class CocktailRepository extends Repository<Cocktail> {
   async createCocktails(
     createCocktailDto: CreateCocktailDto,
     cocktailType: CocktailType,
+    user: User,
   ): Promise<Cocktail> {
     const cocktail = new Cocktail();
     const {
@@ -37,7 +39,11 @@ export class CocktailRepository extends Repository<Cocktail> {
     return cocktail;
   }
 
-  async updateCocktail(id: number, updateCocktailDto: CreateCocktailDto) {
+  async updateCocktail(
+    id: number,
+    updateCocktailDto: CreateCocktailDto,
+    user: User,
+  ) {
     const cocktail = await this.findOne(id);
     const {
       photo_url,
