@@ -1,5 +1,13 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  ManyToMany,
+} from 'typeorm';
 import { CocktailType } from './cocktailtype.enum';
+import { User } from 'src/auth/user.entity';
 
 @Entity()
 export class Cocktail extends BaseEntity {
@@ -17,4 +25,7 @@ export class Cocktail extends BaseEntity {
   directions: string;
   @Column()
   type: CocktailType;
+
+  @ManyToMany(type => User, user => user.cocktails)
+  user: User[];
 }
