@@ -6,7 +6,7 @@ import {
   ConflictException,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { CocktailRepository } from 'src/cocktail/cocktail.repository';
+import { CocktailRepository } from '../cocktail/cocktail.repository';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
@@ -37,7 +37,22 @@ export class UserRepository extends Repository<User> {
     const user = await this.findOne(id);
     const cocktailRepository = getCustomRepository(CocktailRepository);
     const cocktail = await cocktailRepository.findOne(cocktailId);
-    user.cocktails = cocktail;
+    if (user.cocktails.indexOf(cocktail) === -1) {
+      user.cocktails.push(cocktail);
+      user.save();
+    }
+
+    return user;
+  }
+
+  async deleteCocktail(id: number, cocktailId: number): Promise<User> {
+    const user = await this.findOne(id);
+    const cocktailRepository = getCustomRepository(CocktailRepository);
+    const cocktail = await cocktailRepository.findOne(cocktailId);
+    const idx = user.cocktails.findIndex(
+      cocktails => cocktails.id === cocktail.id,
+    );
+    user.cocktails.splice(idx, 1);
     user.save();
     return user;
   }

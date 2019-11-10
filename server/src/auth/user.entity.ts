@@ -4,11 +4,11 @@ import {
   BaseEntity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToMany,
   JoinTable,
+  ManyToMany,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { Cocktail } from 'src/cocktail/cocktail.entity';
+import { Cocktail } from '../cocktail/cocktail.entity';
 
 @Entity()
 @Unique(['username'])
@@ -21,9 +21,12 @@ export class User extends BaseEntity {
   password: string;
   @Column()
   salt: string;
-  @ManyToMany(type => Cocktail)
+
+  @ManyToMany(type => Cocktail, cocktails => cocktails.user, {
+    eager: true,
+  })
   @JoinTable()
-  cocktails: Cocktail;
+  cocktails: Cocktail[];
 
   async validatePassword(password: string): Promise<boolean> {
     const hash = await bcrypt.hash(password, this.salt);
