@@ -1,5 +1,5 @@
 import { EntityRepository, Repository, getCustomRepository } from 'typeorm';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from '../../node_modules/bcryptjs';
 import { User } from './user.entity';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import {
@@ -35,11 +35,15 @@ export class UserRepository extends Repository<User> {
 
   async addCocktail(id: number, cocktailId: number): Promise<User> {
     const user = await this.findOne(id);
+    /// Impot cocktail typeorm connection
     const cocktailRepository = getCustomRepository(CocktailRepository);
+
     const cocktail = await cocktailRepository.findOne(cocktailId);
     if (user.cocktails.indexOf(cocktail) === -1) {
       user.cocktails.push(cocktail);
       user.save();
+    } else {
+      throw new ConflictException('Cocktail already exist in favorites');
     }
 
     return user;
@@ -49,6 +53,7 @@ export class UserRepository extends Repository<User> {
     const user = await this.findOne(id);
     const cocktailRepository = getCustomRepository(CocktailRepository);
     const cocktail = await cocktailRepository.findOne(cocktailId);
+    /// Grab requested cocktails index and remove cocktail from index.
     const idx = user.cocktails.findIndex(
       cocktails => cocktails.id === cocktail.id,
     );
@@ -56,8 +61,6 @@ export class UserRepository extends Repository<User> {
     user.save();
     return user;
   }
-
-  /// validate user password
 
   async validatUserPassword(
     authCredentialsDto: AuthCredentialsDto,
