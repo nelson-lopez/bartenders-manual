@@ -8,7 +8,7 @@ import {
   ManyToMany,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { Cocktail } from 'src/cocktail/cocktail.entity';
+import { Cocktail } from '../cocktail/cocktail.entity';
 
 @Entity()
 @Unique(['username'])

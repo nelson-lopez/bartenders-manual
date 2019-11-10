@@ -19,7 +19,14 @@ export class AuthController {
     return this.authService.signUp(authCredentialsDto);
   }
 
-  @Patch(':id')
+  @Post('/signin')
+  signIn(
+    @Body(ValidationPipe) authCredentialsDto: AuthCredentialsDto,
+  ): Promise<{ accessToken: string }> {
+    return this.authService.signIn(authCredentialsDto);
+  }
+
+  @Patch(':id/add')
   addCocktail(
     @Param('id', ParseIntPipe) id: number,
     @Body('cocktailId', ParseIntPipe) cocktailId: number,
@@ -27,10 +34,11 @@ export class AuthController {
     return this.authService.addCocktail(id, cocktailId);
   }
 
-  @Post('/signin')
-  signIn(
-    @Body(ValidationPipe) authCredentialsDto: AuthCredentialsDto,
-  ): Promise<{ accessToken: string }> {
-    return this.authService.signIn(authCredentialsDto);
+  @Patch(':id/delete')
+  deleteCocktail(
+    @Param('id', ParseIntPipe) id: number,
+    @Body('cocktailId', ParseIntPipe) cocktailId: number,
+  ) {
+    return this.authService.deleteCocktail(id, cocktailId);
   }
 }

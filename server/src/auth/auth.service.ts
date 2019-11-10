@@ -37,4 +37,8 @@ export class AuthService {
   addCocktail(id: number, cockTailId: number): Promise<User> {
     return this.userRepository.addCocktail(id, cockTailId);
   }
+
+  deleteCocktail(id: number, cockTailId: number): Promise<User> {
+    return this.userRepository.deleteCocktail(id, cockTailId);
+  }
 }

@@ -3,11 +3,10 @@ import {
   BaseEntity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToOne,
   ManyToMany,
 } from 'typeorm';
 import { CocktailType } from './cocktailtype.enum';
-import { User } from 'src/auth/user.entity';
+import { User } from '../auth/user.entity';
 
 @Entity()
 export class Cocktail extends BaseEntity {
