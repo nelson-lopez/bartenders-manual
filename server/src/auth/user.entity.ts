@@ -7,7 +7,7 @@ import {
   JoinTable,
   ManyToMany,
 } from 'typeorm';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from '../../node_modules/bcryptjs';
 import { Cocktail } from '../cocktail/cocktail.entity';
 
 @Entity()
@@ -22,9 +22,13 @@ export class User extends BaseEntity {
   @Column()
   salt: string;
 
-  @ManyToMany(type => Cocktail, cocktails => cocktails.user, {
-    eager: true,
-  })
+  @ManyToMany(
+    type => Cocktail,
+    cocktails => cocktails.user,
+    {
+      eager: true,
+    },
+  )
   @JoinTable()
   cocktails: Cocktail[];
 

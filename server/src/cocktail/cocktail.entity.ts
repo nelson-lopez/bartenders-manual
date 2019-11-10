@@ -25,6 +25,9 @@ export class Cocktail extends BaseEntity {
   @Column()
   type: CocktailType;
 
-  @ManyToMany(type => User, user => user.cocktails)
+  @ManyToMany(
+    type => User,
+    user => user.cocktails,
+  )
   user: User[];
 }
