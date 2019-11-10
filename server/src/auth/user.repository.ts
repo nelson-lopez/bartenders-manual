@@ -35,7 +35,7 @@ export class UserRepository extends Repository<User> {
 
   async addCocktail(id: number, cocktailId: number): Promise<User> {
     const user = await this.findOne(id);
-    /// Impot cocktail typeorm connection
+    /// Import cocktail typeorm connection
     const cocktailRepository = getCustomRepository(CocktailRepository);
 
     const cocktail = await cocktailRepository.findOne(cocktailId);
