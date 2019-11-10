@@ -4,9 +4,9 @@
 
 | Day   | Deliverable                             | Status     |
 | ----- | --------------------------------------- | ---------- |
-| Day 1 | Scaffolding REST Backend                | Done |
-| Day 2 | Functioning Crud                        | Done |
-| Day 3 | Stretch goal Auth/ Scaffolding Frontend | Incomplete |
+| Day 1 | Scaffolding REST Backend                | Done       |
+| Day 2 | Functioning Crud                        | Done       |
+| Day 3 | Stretch goal Auth/ Scaffolding Frontend | Done       |
 | Day 4 | Rendering Frontend functionality        | Incomplete |
 | Day 5 | Styling Frontend                        | Incomplete |
 | Day 6 | More styling/ Deployment                | Incomplete |
@@ -26,8 +26,6 @@ This is a tool for browsing a catalog of drinks based off of a customers prefere
 ## Priority Matrix
 
 ![](https://imgur.com/IqEjQDI.png)
-
-
 
 #### MVP
 
@@ -70,12 +68,12 @@ These models will change in the future and become much more expansive as the pro
 
 | Component                             | Priority | Estimated Time | Actual Time |
 | ------------------------------------- | :------: | :------------: | :---------: |
-| API scaffolding                       |    H     |      3hrs      |      1hrs   |
-| Fully fleshing out endpoints          |    H     |     10hrs      |       4hrs  |
-| Scaffolding Frontend                  |    H     |      3hrs      |             |
+| API scaffolding                       |    H     |      3hrs      |    1hrs     |
+| Fully fleshing out endpoints          |    H     |     10hrs      |    10hrs    |
+| Scaffolding Frontend                  |    H     |      3hrs      |    1hrs     |
 | Rendering data to frontend            |    H     |     10hrs      |             |
 | Styling frontend                      |    H     |     14hrs      |             |
-| Deployment                            |    H     |      8hrs      |             |
+| Deployment                            |    H     |      8hrs      |    3hrs     |
 | Feeding the cocktail info into the DB |    H     |      6hrs      |             |
 | Total                                 |    H     |     54hrs      |             |
 
