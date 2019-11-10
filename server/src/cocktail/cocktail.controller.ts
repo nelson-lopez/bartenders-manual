@@ -16,8 +16,8 @@ import { Cocktail } from './cocktail.entity';
 import { CocktailTypeValidationPipe } from './pipes/type-validation.pipe';
 import { CocktailType } from './cocktailtype.enum';
 import { AuthGuard } from '@nestjs/passport';
-import { GetUser } from 'src/auth/get-user.decorator';
-import { User } from 'src/auth/user.entity';
+import { GetUser } from '../auth/get-user.decorator';
+import { User } from '../auth/user.entity';
 
 @Controller('cocktails')
 export class CocktailController {
