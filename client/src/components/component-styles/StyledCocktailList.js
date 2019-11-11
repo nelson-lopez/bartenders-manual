@@ -19,7 +19,7 @@ const StyledCocktailList = styled.div`
     font-size: 36px;
     text-align: left;
     font-weigth: bold;
-    color: #843636;
+    color: #f5f5f5;
     padding-left: 90px;
   }
   img {
@@ -31,7 +31,8 @@ const StyledCocktailList = styled.div`
     font-size: 18px;
     line-height: 20px;
     font-weigth: bold;
-    color: #fbf1f1;
+    color: #2f3a60;
+    font-weight: bold;
   }
 `;
 
