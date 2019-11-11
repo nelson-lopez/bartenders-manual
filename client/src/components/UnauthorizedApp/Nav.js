@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 
 const Nav = () => {
   return (
@@ -7,17 +7,15 @@ const Nav = () => {
       <h2>Nelson's Bartending Manual</h2>
       <ul>
         <li>
-          <Link href="/index">
-            <a>Home</a>
-          </Link>
+          <a>Home</a>
         </li>
         <li>
-          <Link href="/unAuthCocktailList">
+          <Link to="/cocktails">
             <a>Cocktails</a>
           </Link>
         </li>
         <li>
-          <Link href="/unAuthIngredientsList">
+          <Link to="/ingredients">
             <a>Ingredients</a>
           </Link>
         </li>
