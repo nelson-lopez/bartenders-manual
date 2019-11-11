@@ -16,6 +16,7 @@ const Nav = () => {
         <li>
           <Link to="/ingredients">Ingredients</Link>
         </li>
+        <li>Favorites</li>
         <li>Search</li>
       </ul>
     </StyledNav>
