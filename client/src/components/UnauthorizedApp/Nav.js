@@ -1,32 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import StyledNav from '../component-styles/StyledNav';
 
 const Nav = () => {
   return (
-    <div>
+    <StyledNav>
       <h2>Nelson's Bartending Manual</h2>
       <ul>
         <li>
-          <a>Home</a>
+          <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/cocktails">
-            <a>Cocktails</a>
-          </Link>
+          <Link to="/cocktails">Cocktails</Link>
         </li>
         <li>
-          <Link to="/ingredients">
-            <a>Ingredients</a>
-          </Link>
+          <Link to="/ingredients">Ingredients</Link>
         </li>
-        <li>
-          <a>Favorites</a>
-        </li>
-        <li>
-          <a>Search</a>
-        </li>
+        <li>Favorites</li>
+        <li>Search</li>
       </ul>
-    </div>
+    </StyledNav>
   );
 };
 
