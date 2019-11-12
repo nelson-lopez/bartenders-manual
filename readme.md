@@ -7,10 +7,10 @@
 | Day 1 | Scaffolding REST Backend                | Done       |
 | Day 2 | Functioning Crud                        | Done       |
 | Day 3 | Stretch goal Auth/ Scaffolding Frontend | Done       |
-| Day 4 | Rendering Frontend functionality        | Incomplete |
-| Day 5 | Styling Frontend                        | Incomplete |
-| Day 6 | More styling/ Deployment                | Incomplete |
-| Day 7 | Styling/Deployment                      | Incomplete |
+| Day 4 | Rendering Frontend functionality        | Done |
+| Day 5 | Styling Frontend                        | Done |
+| Day 6 | Deployment t                | Done |
+| Day 7 | Auth Front-end                      | Incomplete |
 | Day 8 | Present                                 | Incomplete |
 
 ## Project Description
