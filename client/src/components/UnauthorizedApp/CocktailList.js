@@ -1,9 +1,30 @@
-import React from 'react';
-import StyledCocktailList from '../component-styles/StyledCocktailList';
+import React, { useState } from 'react';
+import StyledList from '../component-styles/StyledList';
+import useGetCocktails from '../../api/getCocktails';
 
-const CocktailList = () => {
+const CocktailList = props => {
+  const [type, setType] = useState(props.location.state.type);
+
+  const data = useGetCocktails(type);
+  if (data)
+    return (
+      <StyledList>
+        <h2>Cocktails</h2>
+        <div className="container">
+          {data.map(cocktail => {
+            return (
+              <div className="cocktail-category" key={cocktail.id}>
+                <img src={cocktail.photo_url} alt={cocktail.id} />
+                <p>{cocktail.name}</p>
+              </div>
+            );
+          })}
+        </div>
+      </StyledList>
+    );
+
   return (
-    <StyledCocktailList>
+    <StyledList>
       <h2>Cocktails</h2>
       <div className="container">
         <div className="cocktail-category">
@@ -31,7 +52,7 @@ const CocktailList = () => {
           <p>Dessert</p>
         </div>
       </div>
-    </StyledCocktailList>
+    </StyledList>
   );
 };
 
