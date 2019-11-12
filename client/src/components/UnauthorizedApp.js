@@ -5,6 +5,7 @@ import IngredientsList from "./UnauthorizedApp/IngredientsList";
 import CocktailList from "./UnauthorizedApp/CocktailList";
 import CocktailCard from ".//UnauthorizedApp/CocktailCard";
 import Landing from "./UnauthorizedApp/Landing";
+import Login from "./UnauthorizedApp/Login";
 import Nav from "./UnauthorizedApp/Nav";
 import AppWrapper from "./component-styles/AppWrapper";
 
@@ -18,6 +19,7 @@ const UnauthorizedApp = () => {
         <Route exact path="/ingredients" component={IngredientsList} />
         <Route exact path="/cocktail-list" component={CocktailList} />
         <Route exact path="/cocktail/:id" component={CocktailCard} />
+        <Route exact path="/login" component={Login} />
       </Switch>
     </AppWrapper>
   );
