@@ -1,15 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import StyledNav from "../component-styles/StyledNav";
-import { Redirect } from "react-router-dom";
 
 const Nav = () => {
-  const [redirect, setRedirect] = useState(false);
-
-  const handleOnClick = () => {
-    setRedirect(!redirect);
-  };
-  if (redirect) return <Redirect to="/login" />;
   return (
     <StyledNav>
       <h2>Nelson's Bartending Manual</h2>
@@ -25,7 +18,9 @@ const Nav = () => {
         </li>
         <li>Favorites</li>
         <li>Search</li>
-        <li onClick={handleOnClick}>Sign In</li>
+        <li>
+          <Link to="/login">Sign In</Link>
+        </li>
       </ul>
     </StyledNav>
   );

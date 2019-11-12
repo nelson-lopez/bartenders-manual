@@ -15,11 +15,11 @@ const UnauthorizedApp = () => {
       <Nav />
       <Switch>
         <Route exact path="/" component={Landing} />
+        <Route exact path="/login" component={Login} />
         <Route exact path="/cocktails" component={CocktailCategories} />
         <Route exact path="/ingredients" component={IngredientsList} />
         <Route exact path="/cocktail-list" component={CocktailList} />
         <Route exact path="/cocktail/:id" component={CocktailCard} />
-        <Route exact path="/login" component={Login} />
       </Switch>
     </AppWrapper>
   );
