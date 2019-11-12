@@ -71,7 +71,7 @@ These models will change in the future and become much more expansive as the pro
 | API scaffolding                       |    H     |      3hrs      |    1hrs     |
 | Fully fleshing out endpoints          |    H     |     10hrs      |    10hrs    |
 | Scaffolding Frontend                  |    H     |      3hrs      |    1hrs     |
-| Rendering data to frontend            |    H     |     10hrs      |             |
+| Rendering data to frontend            |    H     |     10hrs      |    5         |
 | Styling frontend                      |    H     |     14hrs      |             |
 | Deployment                            |    H     |      8hrs      |    3hrs     |
 | Feeding the cocktail info into the DB |    H     |      6hrs      |             |
