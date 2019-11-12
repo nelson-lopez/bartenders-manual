@@ -1,14 +1,15 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const useGetCocktails = type => {
+  const proxy = "https://cors-anywhere.herokuapp.com/";
   const url =
-    'http://cocktail-db-production.us-east-1.elasticbeanstalk.com/cocktails';
+    "http://cocktail-db-production.us-east-1.elasticbeanstalk.com/cocktails";
   const [data, setData] = useState(null);
   console.log(type);
   useEffect(() => {
     axios
-      .get(url)
+      .get(proxy + url)
       .then(response => {
         setData(response.data.filter(cocktail => cocktail.type === type));
       })
