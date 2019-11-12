@@ -6,6 +6,8 @@ const useGetCocktails = type => {
   const url =
     "http://cocktail-db-production.us-east-1.elasticbeanstalk.com/cocktails";
   const [data, setData] = useState(null);
+
+  console.log(data);
   useEffect(() => {
     axios
       .get(proxy + url)

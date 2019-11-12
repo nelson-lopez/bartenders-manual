@@ -13,8 +13,17 @@ const CocktailCard = props => {
       <StyledCocktail>
         <h2>{data.name}</h2>
         <img src={data.photo_url} alt="woops" />
-        <p>{data.directions}</p>
-        <p>{data.ingredients}</p>
+        <h3>{data.description}</h3>
+        <div className="data-container">
+          <div className="ingredients-container">
+            <p className="ingredients">Ingredients</p>
+            <p className="ingredient-items">{data.ingredients}</p>
+          </div>
+          <div className="directions-container">
+            <p className="directions">Directions</p>
+            <p className="direction-items">{data.directions}</p>
+          </div>
+        </div>
       </StyledCocktail>
     );
   else return <div>loading</div>;
