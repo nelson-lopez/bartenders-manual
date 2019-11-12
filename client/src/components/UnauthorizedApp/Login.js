@@ -8,9 +8,22 @@ const Login = () => {
     password: ""
   });
 
+  const [userData, setData] = useState({
+    username: "",
+    password: ""
+  });
+
   const handleSubmit = e => {
     e.preventDefault();
+    setData({
+      username: input.username,
+      password: input.password
+    });
   };
+
+  const token = useUserLogin(userData.username, userData.password);
+
+  console.log(token);
 
   const handleOnInput = e => {
     const key = e.target.className;
@@ -19,9 +32,6 @@ const Login = () => {
       ...prevState,
       [key]: value
     }));
-    console.log(e.target.className);
-
-    console.log(input);
   };
   // console.log(useUserLogin());
   return (
