@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import StyledNav from '../component-styles/StyledNav';
+import React from "react";
+import { Link } from "react-router-dom";
+import StyledNav from "../component-styles/StyledNav";
 
 const Nav = () => {
   return (
@@ -18,6 +18,9 @@ const Nav = () => {
         </li>
         <li>Favorites</li>
         <li>Search</li>
+        <li>
+          <Link to="/login">Sign In</Link>
+        </li>
       </ul>
     </StyledNav>
   );
