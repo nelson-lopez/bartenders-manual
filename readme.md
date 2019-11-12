@@ -9,7 +9,7 @@
 | Day 3 | Stretch goal Auth/ Scaffolding Frontend | Done       |
 | Day 4 | Rendering Frontend functionality        | Done |
 | Day 5 | Styling Frontend                        | Done |
-| Day 6 | Deployment t                | Done |
+| Day 6 | Deployment                 | Done |
 | Day 7 | Auth Front-end                      | Incomplete |
 | Day 8 | Present                                 | Incomplete |
 
