@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const useUserLogin = (username, password) => {
+const useUserSignUp = (username, password) => {
   const [token, setToken] = useState(null);
   const proxy = "https://cors-anywhere.herokuapp.com/";
   const url =
@@ -26,4 +26,4 @@ const useUserLogin = (username, password) => {
   return token;
 };
 
-export default useUserLogin;
+export default useUserSignUp;

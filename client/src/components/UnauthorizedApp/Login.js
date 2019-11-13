@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import StyledLogin from "../component-styles/StyledLogin";
-import useUserLogin from "../../api/postUserLogin";
+import userUserSignup from "../../api/postUserSignUp";
+import InputBox from "./InputBox";
+import SuccessfullSignUp from "./SuccessfullSignup";
 
 const Login = () => {
   const [input, setInput] = useState({
@@ -8,10 +9,12 @@ const Login = () => {
     password: ""
   });
 
+  console.log(input);
   const [userData, setData] = useState({
     username: "",
     password: ""
   });
+  const [isClicked, setClicked] = useState(false);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -19,11 +22,10 @@ const Login = () => {
       username: input.username,
       password: input.password
     });
+    setClicked(!isClicked);
   };
 
-  const token = useUserLogin(userData.username, userData.password);
-
-  console.log(token);
+  const isSignedUp = userUserSignup(userData.username, userData.password);
 
   const handleOnInput = e => {
     const key = e.target.className;
@@ -33,33 +35,12 @@ const Login = () => {
       [key]: value
     }));
   };
-  // console.log(useUserLogin());
+
+  if (isSignedUp && isSignedUp.statusText === "Created")
+    return <SuccessfullSignUp />;
   return (
     <div>
-      <StyledLogin>
-        <h2>To continue please login:</h2>
-        <div className="login-container">
-          <form onSubmit={handleSubmit}>
-            <div>
-              <input
-                placeholder="User Name"
-                className="username"
-                onChange={handleOnInput}
-              ></input>
-            </div>
-            <div>
-              <input
-                placeholder="Password"
-                className="password"
-                onChange={handleOnInput}
-              ></input>
-            </div>
-            <div>
-              <input type="submit" value="Submit" className="submit-button" />
-            </div>
-          </form>
-        </div>
-      </StyledLogin>
+      <InputBox handleOnInput={handleOnInput} handleSubmit={handleSubmit} />
     </div>
   );
 };
