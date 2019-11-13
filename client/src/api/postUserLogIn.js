@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
-const useUserSignUp = (username, password) => {
-  const [result, setResult] = useState(null);
+const useUserLogIn = (username, password) => {
+  const [token, setToken] = useState(null);
   const proxy = "https://cors-anywhere.herokuapp.com/";
   const url =
-    "http://cocktail-db-production.us-east-1.elasticbeanstalk.com/auth/signup";
+    "http://cocktail-db-production.us-east-1.elasticbeanstalk.com/auth/signin";
 
   useEffect(() => {
     if ((username, password)) {
@@ -15,7 +15,7 @@ const useUserSignUp = (username, password) => {
           password: password
         })
         .then(response => {
-          setResult(response);
+          setToken(response);
         })
         .catch(error => {
           throw new Error(error);
@@ -23,7 +23,7 @@ const useUserSignUp = (username, password) => {
     }
   }, [username, password]);
 
-  return result;
+  return token;
 };
 
-export default useUserSignUp;
+export default useUserLogIn;

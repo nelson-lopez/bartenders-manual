@@ -1,7 +1,7 @@
 import React from "react";
 import StyledSignUp from "../component-styles/StyledSignUp";
 
-const InputBox = ({ handleOnInput, handleSubmit }) => {
+const InputBox = ({ handleOnInput, handleSubmit, type }) => {
   const onInput = e => {
     handleOnInput(e);
   };
@@ -12,7 +12,7 @@ const InputBox = ({ handleOnInput, handleSubmit }) => {
 
   return (
     <StyledSignUp>
-      <h2>To continue please Sign up:</h2>
+      <h2>To continue please {type}:</h2>
       <div className="login-container">
         <form onSubmit={onSubmit}>
           <div>

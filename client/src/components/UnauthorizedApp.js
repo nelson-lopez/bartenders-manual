@@ -8,6 +8,7 @@ import Landing from "./UnauthorizedApp/Landing";
 import SignUp from "./UnauthorizedApp/SignUp";
 import Nav from "./UnauthorizedApp/Nav";
 import AppWrapper from "./component-styles/AppWrapper";
+import LogIn from "./UnauthorizedApp/LogIn";
 
 const UnauthorizedApp = () => {
   return (
@@ -16,6 +17,7 @@ const UnauthorizedApp = () => {
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/login" component={LogIn} />
         <Route exact path="/cocktails" component={CocktailCategories} />
         <Route exact path="/ingredients" component={IngredientsList} />
         <Route exact path="/cocktail-list" component={CocktailList} />
