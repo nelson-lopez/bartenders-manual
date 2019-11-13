@@ -44,6 +44,9 @@ const Nav = ({ isLoggedIn }) => {
         <li>Favorites</li>
         <li>Search</li>
         <li>
+          <Link to="/addcocktail">Add Cocktail</Link>
+        </li>
+        <li>
           <Link to="/logout">Logout</Link>
         </li>
       </ul>

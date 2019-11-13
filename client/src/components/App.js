@@ -4,6 +4,7 @@ import CocktailCategories from "./UnauthorizedApp/CocktailCategories";
 import IngredientsList from "./UnauthorizedApp/IngredientsList";
 import CocktailList from "./UnauthorizedApp/CocktailList";
 import CocktailCard from "./UnauthorizedApp/CocktailCard";
+import AddCocktail from "./AuthorizedApp/AddCocktail";
 import AuthCocktailCard from "./AuthorizedApp/AuthCocktailCard";
 import Landing from "./UnauthorizedApp/Landing";
 import SignUp from "./UnauthorizedApp/SignUp";
@@ -63,6 +64,7 @@ const App = () => {
           path="/logout"
           component={() => <Logout handleRemoveToken={handleRemoveToken} />}
         />
+        <Route exact path="/addcocktail" component={AddCocktail} />
       </Switch>
     </AppWrapper>
   );
