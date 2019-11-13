@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import userUserSignup from "../../api/postUserSignUp";
 import InputBox from "./InputBox";
-import SuccessfullSignUp from "./SuccessfullSignup";
+import SuccessfulSignUp from "./SuccessfulSignup";
 
-const Login = () => {
+const SignUp = () => {
   const [input, setInput] = useState({
     username: "",
     password: ""
@@ -37,7 +37,7 @@ const Login = () => {
   };
 
   if (isSignedUp && isSignedUp.statusText === "Created")
-    return <SuccessfullSignUp />;
+    return <SuccessfulSignUp />;
   return (
     <div>
       <InputBox handleOnInput={handleOnInput} handleSubmit={handleSubmit} />
@@ -45,4 +45,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;

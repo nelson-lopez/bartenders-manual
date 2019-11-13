@@ -19,7 +19,7 @@ const Nav = () => {
         <li>Favorites</li>
         <li>Search</li>
         <li>
-          <Link to="/login">Sign In</Link>
+          <Link to="/signup">Sign In</Link>
         </li>
       </ul>
     </StyledNav>
