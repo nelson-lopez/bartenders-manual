@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledLogin = styled.div`
+const StyledSignUp = styled.div`
   min-width: 81vw;
   min-height: 100vh;
   background-color: #0d1635;
@@ -54,4 +54,4 @@ const StyledLogin = styled.div`
   }
 `;
 
-export default StyledLogin;
+export default StyledSignUp;
