@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import useUserLogin from "../../api/postUserLogIn";
 import InputBox from "./InputBox";
 
-export default function LogIn() {
+export default function LogIn({ handleSetToken }) {
   const [input, setInput] = useState({
     username: "",
     password: ""
   });
 
-  console.log(input);
+  console.log(handleSetToken);
   const [userData, setData] = useState({
     username: "",
     password: ""
@@ -23,7 +23,11 @@ export default function LogIn() {
   };
 
   const token = useUserLogin(userData.username, userData.password);
-  console.log(token);
+  if (token && token.data.accessToken) {
+    localStorage.setItem("token", token.data.accessToken);
+    const jwt = localStorage.getItem("token");
+    handleSetToken(jwt);
+  }
   const handleOnInput = e => {
     const key = e.target.className;
     const value = e.target.value;
