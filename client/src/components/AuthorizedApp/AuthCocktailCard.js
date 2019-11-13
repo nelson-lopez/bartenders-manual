@@ -1,17 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import useGetCocktailById from "../../api/getCocktailById";
 import StyledCocktail from "../component-styles/StyledCocktail";
+import StyledButton from "../component-styles/StyledButton";
+import useDeleteCocktail from "../../api/deleteCocktailById";
 
 const CocktailCard = props => {
   const [id, setId] = useState(props.location.state.id);
+  const [isClicked, setClicked] = useState(false);
+  const [isDeleted, setDeleted] = useState(false);
+
+  const token = localStorage.getItem("token");
 
   const data = useGetCocktailById(id);
-  console.log(data);
 
+  const handleOnDelete = () => {
+    setClicked(!isClicked);
+  };
+  useDeleteCocktail(id, isClicked, token);
+
+  useEffect(() => {
+    if (isClicked === true) {
+      setDeleted(!isDeleted);
+    }
+  }, [isClicked, isDeleted]);
+
+  if (isDeleted) return <Redirect to="/cocktails" />;
   if (data)
     return (
       <StyledCocktail>
         <h2>{data.name}</h2>
+        <StyledButton onClick={handleOnDelete}>Delete</StyledButton>
         <img src={data.photo_url} alt="woops" />
         <h3>{data.description}</h3>
         <div className="data-container">
