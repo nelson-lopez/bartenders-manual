@@ -17,35 +17,35 @@ const FavoritesList = ({ username }) => {
 
   const data = useGetFavorites(token, username);
   console.log(data);
-  // if (redirect)
-  //   return (
-  //     <Redirect
-  //       to={{
-  //         pathname: `/cocktail/${id}`,
-  //         state: { id: id }
-  //       }}
-  //     />
-  //   );
-  // else if (data)
-  //   return (
-  //     <StyledList>
-  //       <h2>Cocktails</h2>
-  //       <div className="container">
-  //         {data.map(cocktail => {
-  //           return (
-  //             <div
-  //               className="cocktail-category"
-  //               key={cocktail.id}
-  //               onClick={handleOnClick}
-  //             >
-  //               <img src={cocktail.photo_url} alt={cocktail.id} />
-  //               <p>{cocktail.name}</p>
-  //             </div>
-  //           );
-  //         })}
-  //       </div>
-  //     </StyledList>
-  //   );
+  if (redirect)
+    return (
+      <Redirect
+        to={{
+          pathname: `/cocktail/${id}`,
+          state: { id: id }
+        }}
+      />
+    );
+  else if (data)
+    return (
+      <StyledList>
+        <h2>Cocktails</h2>
+        <div className="container">
+          {data.map(cocktail => {
+            return (
+              <div
+                className="cocktail-category"
+                key={cocktail.id}
+                onClick={handleOnClick}
+              >
+                <img src={cocktail.photo_url} alt={cocktail.id} />
+                <p>{cocktail.name}</p>
+              </div>
+            );
+          })}
+        </div>
+      </StyledList>
+    );
 
   return <div>loading..</div>;
 };

@@ -10,7 +10,7 @@ const useGetFavorites = (token, username) => {
   useEffect(() => {
     if (token && username) {
       axios
-        .get(
+        .post(
           url,
           {
             username
@@ -21,7 +21,7 @@ const useGetFavorites = (token, username) => {
             }
           }
         )
-        .then(response => setData(response))
+        .then(response => setData(response.data[0].cocktails))
         .catch(error => new Error(error));
     }
   }, [token, username]);
