@@ -49,7 +49,7 @@ export class AuthController {
     return this.authService.deleteCocktail(id, cocktailId);
   }
 
-  @Get('/find')
+  @Post('/find')
   getUser(@Body('username') username: string): Promise<User[]> {
     return this.authService.getUser(username);
   }
