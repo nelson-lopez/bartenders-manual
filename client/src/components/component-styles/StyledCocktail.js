@@ -83,6 +83,17 @@ const StyledCocktail = styled.div`
   p {
     color: #fef9f9;
   }
+  .buttons-container {
+    display: flex;
+  }
+  .cocktail-buttons {
+    width: 125px;
+    height: 47px;
+    color: FBFBFB;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+  }
 `;
 
 export default StyledCocktail;

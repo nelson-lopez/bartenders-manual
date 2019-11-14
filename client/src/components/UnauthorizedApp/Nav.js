@@ -17,7 +17,6 @@ const Nav = ({ isLoggedIn }) => {
           <li>
             <Link to="/ingredients">Ingredients</Link>
           </li>
-          <li>Favorites</li>
           <li>Search</li>
           <li>
             <Link to="/signup">Sign Up</Link>

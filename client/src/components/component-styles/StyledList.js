@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const StyledCocktailList = styled.div`
   min-width: 81vw;
@@ -25,7 +25,8 @@ const StyledCocktailList = styled.div`
   img {
     width: 366px;
     height: 335px;
-    box-shadow: 1px 10px 0px 0px rgba(10, 2, 2, 0.5);
+    box-shadow: 1px -1px 7px 13px rgba(10, 2, 2, 0.5);
+    cursor: pointer;
   }
   p {
     font-size: 18px;
@@ -33,6 +34,7 @@ const StyledCocktailList = styled.div`
     font-weigth: bold;
     color: #2f3a60;
     font-weight: bold;
+    cursor: pointer;
   }
 `;
 
