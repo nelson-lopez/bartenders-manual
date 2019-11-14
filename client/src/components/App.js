@@ -46,7 +46,7 @@ const App = () => {
   return (
     <AppWrapper>
       <Nav isLoggedIn={true} />
-      TEST
+
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/signup" component={SignUp} />
