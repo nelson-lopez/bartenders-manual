@@ -5,6 +5,7 @@ import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import {
   ConflictException,
   InternalServerErrorException,
+  NotAcceptableException,
 } from '@nestjs/common';
 import { CocktailRepository } from '../cocktail/cocktail.repository';
 
@@ -49,6 +50,15 @@ export class UserRepository extends Repository<User> {
     return user;
   }
 
+  async getUser(username: string): Promise<User[]> {
+    const user = await this.find({ username: username });
+    console.log(user);
+    if (!user) {
+      throw new NotAcceptableException(`User with ${username} not found!`);
+    }
+    return user;
+  }
+
   async deleteCocktail(id: number, cocktailId: number): Promise<User> {
     const user = await this.findOne(id);
     const cocktailRepository = getCustomRepository(CocktailRepository);
@@ -62,9 +72,7 @@ export class UserRepository extends Repository<User> {
     return user;
   }
 
-  async validatUserPassword(
-    authCredentialsDto: AuthCredentialsDto,
-  ): Promise<string> {
+  async validatUserPassword(authCredentialsDto: AuthCredentialsDto) {
     const { username, password } = authCredentialsDto;
     const user = await this.findOne({ username });
 

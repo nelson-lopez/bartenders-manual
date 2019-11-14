@@ -8,10 +8,12 @@ import {
   Patch,
   UseGuards,
   Logger,
+  Get,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { User } from './user.entity';
 
 @Controller('auth')
 export class AuthController {
@@ -45,5 +47,10 @@ export class AuthController {
     @Body('cocktailId', ParseIntPipe) cocktailId: number,
   ) {
     return this.authService.deleteCocktail(id, cocktailId);
+  }
+
+  @Get('/find')
+  getUser(@Body('username') username: string): Promise<User[]> {
+    return this.authService.getUser(username);
   }
 }
