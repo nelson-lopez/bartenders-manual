@@ -10,7 +10,7 @@
 | Day 4 | Rendering Frontend functionality        | Done |
 | Day 5 | Styling Frontend                        | Done |
 | Day 6 | Deployment                 | Done |
-| Day 7 | Auth Front-end                      | Incomplete |
+| Day 7 | Auth Front-end                      | Done |
 | Day 8 | Present                                 | Incomplete |
 
 ## Project Description
