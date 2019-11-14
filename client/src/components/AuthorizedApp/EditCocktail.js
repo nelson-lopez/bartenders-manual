@@ -30,7 +30,6 @@ const EditCocktail = ({ id }) => {
     setClick(!isClicked);
   };
   useUpdateCocktail(cocktailInfo, isClicked, token, id);
-  console.log(cocktailInfo);
 
   return (
     <StyledAddCocktail>

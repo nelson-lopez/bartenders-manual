@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import jwt_decode from "jwt-decode";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import CocktailCategories from "./UnauthorizedApp/CocktailCategories";
 import IngredientsList from "./UnauthorizedApp/IngredientsList";
@@ -12,18 +13,22 @@ import Nav from "./UnauthorizedApp/Nav";
 import AppWrapper from "./component-styles/AppWrapper";
 import LogIn from "./UnauthorizedApp/LogIn";
 import Logout from "./AuthorizedApp/Logout";
+import FavoritesList from "./AuthorizedApp/FavoritesList";
 
 const App = () => {
   const [token, setToken] = useState(null);
+  const [username, setUsername] = useState(null);
 
   const handleSetToken = value => {
     setToken(value);
+    const { username } = jwt_decode(value);
+    setUsername(username);
   };
 
   const handleRemoveToken = () => {
     setToken(null);
   };
-  console.log(token);
+
   if (!token)
     return (
       <AppWrapper>
@@ -46,7 +51,7 @@ const App = () => {
   return (
     <AppWrapper>
       <Nav isLoggedIn={true} />
-      TEST
+
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/signup" component={SignUp} />
@@ -65,6 +70,11 @@ const App = () => {
           component={() => <Logout handleRemoveToken={handleRemoveToken} />}
         />
         <Route exact path="/addcocktail" component={AddCocktail} />
+        <Route
+          exact
+          path="/favorites"
+          component={() => <FavoritesList username={username} />}
+        />
       </Switch>
     </AppWrapper>
   );

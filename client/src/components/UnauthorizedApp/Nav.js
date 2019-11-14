@@ -41,7 +41,9 @@ const Nav = ({ isLoggedIn }) => {
         <li>
           <Link to="/ingredients">Ingredients</Link>
         </li>
-        <li>Favorites</li>
+        <li>
+          <Link to="/favorites">Favorites</Link>
+        </li>
         <li>Search</li>
         <li>
           <Link to="/addcocktail">Add Cocktail</Link>
