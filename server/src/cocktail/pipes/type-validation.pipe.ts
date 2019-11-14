@@ -10,7 +10,7 @@ export class CocktailTypeValidationPipe implements PipeTransform {
     CocktailType.Smash,
     CocktailType.Stirred,
     CocktailType.Swizzle,
-    CocktailType.Shaken,
+    CocktailType.Sour,
   ];
 
   transform(value: any) {
