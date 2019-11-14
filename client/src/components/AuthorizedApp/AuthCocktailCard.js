@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import useGetCocktailById from "../../api/getCocktailById";
 import StyledCocktail from "../component-styles/StyledCocktail";
-import StyledButton from "../component-styles/StyledButton";
 import useDeleteCocktail from "../../api/deleteCocktailById";
 import EditCocktail from "../AuthorizedApp/EditCocktail";
 
@@ -10,6 +9,7 @@ const CocktailCard = props => {
   const [id, setId] = useState(props.location.state.id);
   const [isClicked, setClicked] = useState(false);
   const [isDeleted, setDeleted] = useState(false);
+  const [back, setBack] = useState(false);
   const [edit, setEdit] = useState(false);
 
   const token = localStorage.getItem("token");
@@ -23,6 +23,11 @@ const CocktailCard = props => {
   const handleOnEdit = () => {
     setEdit(!edit);
   };
+
+  const handleOnBack = () => {
+    setBack(!back);
+  };
+
   useDeleteCocktail(id, isClicked, token);
 
   useEffect(() => {
@@ -31,14 +36,13 @@ const CocktailCard = props => {
     }
   }, [isClicked, isDeleted]);
 
+  if (back) return <Redirect to="/cocktails" />;
   if (isDeleted) return <Redirect to="/cocktails" />;
   if (edit) return <EditCocktail id={id} />;
   if (data)
     return (
       <StyledCocktail>
         <h2>{data.name}</h2>
-        <StyledButton onClick={handleOnDelete}>Delete</StyledButton>
-        <StyledButton onClick={handleOnEdit}>Edit</StyledButton>
         <img src={data.photo_url} alt="woops" />
         <h3>{data.description}</h3>
         <div className="data-container">
@@ -50,6 +54,17 @@ const CocktailCard = props => {
             <p className="directions">Directions</p>
             <p className="direction-items">{data.directions}</p>
           </div>
+        </div>
+        <div className="buttons-container">
+          <p onClick={handleOnBack} className="cocktail-buttons">
+            Back
+          </p>
+          <p onClick={handleOnDelete} className="cocktail-buttons">
+            Delete
+          </p>
+          <p onClick={handleOnEdit} className="cocktail-buttons">
+            Edit
+          </p>
         </div>
       </StyledCocktail>
     );

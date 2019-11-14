@@ -22,7 +22,7 @@ const StyledNav = styled.div`
   }
   h2 {
     text-align: center;
-    color: #1c274d;
+    color: #9e1e59;
     width: 218px;
     height: 139px;
     line-height: 30px;
