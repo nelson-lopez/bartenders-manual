@@ -8,7 +8,7 @@ import { CocktailRepository } from './cocktail.repository';
 import { Cocktail } from './cocktail.entity';
 import { CreateCocktailDto } from './dto/createCocktail.dto';
 import { CocktailType } from './cocktailtype.enum';
-import { User } from 'src/auth/user.entity';
+import { User } from '../auth/user.entity';
 
 @Injectable()
 export class CocktailService {
@@ -36,12 +36,10 @@ export class CocktailService {
   createCocktail(
     createCocktailDto: CreateCocktailDto,
     cocktailType: CocktailType,
-    user: User,
   ): Promise<Cocktail> {
     return this.cocktailRepository.createCocktails(
       createCocktailDto,
       cocktailType,
-      user,
     );
   }
 

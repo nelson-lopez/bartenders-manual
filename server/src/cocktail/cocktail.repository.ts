@@ -17,7 +17,6 @@ export class CocktailRepository extends Repository<Cocktail> {
   async createCocktails(
     createCocktailDto: CreateCocktailDto,
     cocktailType: CocktailType,
-    user: User,
   ): Promise<Cocktail> {
     const cocktail = new Cocktail();
     const {
