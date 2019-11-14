@@ -36,6 +36,16 @@ export class CocktailController {
   }
 
   @UseGuards(AuthGuard())
+  @Post()
+  createCocktail(
+    @Body('type', CocktailTypeValidationPipe)
+    cocktailType: CocktailType,
+    @Body() createCockTailDto: CreateCocktailDto,
+  ): Promise<Cocktail> {
+    return this.cocktailService.createCocktail(createCockTailDto, cocktailType);
+  }
+
+  @UseGuards(AuthGuard())
   @Patch('/:id/update')
   updateCocktail(
     @Param('id', ParseIntPipe) id: number,
@@ -44,24 +54,6 @@ export class CocktailController {
   ): Promise<Cocktail> {
     this.logger.verbose(`User ${user.username} is updating cocktail`);
     return this.cocktailService.updateCockTail(id, updateCocktailDto, user);
-  }
-
-  @UseGuards(AuthGuard())
-  @Post()
-  createCocktail(
-    @Body('type', CocktailTypeValidationPipe)
-    cocktailType: CocktailType,
-    @Body() createCockTailDto: CreateCocktailDto,
-    @GetUser() user: User,
-  ): Promise<Cocktail> {
-    this.logger.verbose(
-      `User ${user.username} is creating ${createCockTailDto.name}`,
-    );
-    return this.cocktailService.createCocktail(
-      createCockTailDto,
-      cocktailType,
-      user,
-    );
   }
 
   @UseGuards(AuthGuard())

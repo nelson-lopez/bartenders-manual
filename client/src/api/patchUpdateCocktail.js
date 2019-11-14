@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import axios from "axios";
 
-const useAddCocktail = (cocktail, isClicked, token) => {
-  const url = `http://cocktail-db-production.us-east-1.elasticbeanstalk.com/cocktails`;
+const useUpdateCocktail = (cocktail, isClicked, token, id) => {
+  const url = `http://cocktail-db-production.us-east-1.elasticbeanstalk.com/cocktails/${id}/update`;
 
   useEffect(() => {
     if (isClicked === true)
       axios
-        .post(
+        .patch(
           url,
           {
             photo_url: cocktail.photo_url,
@@ -43,4 +43,4 @@ const useAddCocktail = (cocktail, isClicked, token) => {
   ]);
 };
 
-export default useAddCocktail;
+export default useUpdateCocktail;
