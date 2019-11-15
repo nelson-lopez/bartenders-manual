@@ -1,5 +1,8 @@
 # Nelsons Bartending Manual
-
+client:
+https://client.devnelsonlopez.now.sh/
+server:
+http://cocktail-db-production.us-east-1.elasticbeanstalk.com/cocktails
 ## Project Schedule
 
 | Day   | Deliverable                             | Status     |
