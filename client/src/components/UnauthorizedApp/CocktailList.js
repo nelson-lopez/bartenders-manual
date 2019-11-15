@@ -27,7 +27,7 @@ const CocktailList = props => {
   else if (data)
     return (
       <StyledList>
-        <h2>Cocktails</h2>
+        <h2>{type}</h2>
         <div className="container">
           {data.map(cocktail => {
             return (

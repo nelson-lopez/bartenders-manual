@@ -3,14 +3,14 @@ import axios from "axios";
 
 const useUserLogIn = (username, password) => {
   const [token, setToken] = useState(null);
-
+  const proxy = "https://cors-anywhere.herokuapp.com/";
   const url =
     "http://cocktail-db-production.us-east-1.elasticbeanstalk.com/auth/signin";
 
   useEffect(() => {
     if ((username, password)) {
       axios
-        .post(url, {
+        .post(proxy + url, {
           username: username,
           password: password
         })

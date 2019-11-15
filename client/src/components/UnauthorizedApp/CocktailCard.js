@@ -6,7 +6,6 @@ const CocktailCard = props => {
   const [id, setId] = useState(props.location.state.id);
 
   const data = useGetCocktailById(id);
-  console.log(data);
 
   if (data)
     return (

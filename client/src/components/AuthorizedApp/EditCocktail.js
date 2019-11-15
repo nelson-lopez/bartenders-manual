@@ -14,7 +14,6 @@ const EditCocktail = ({ id }) => {
   });
 
   const token = localStorage.getItem("token");
-  console.log(token);
 
   const onInput = e => {
     const key = e.target.name;

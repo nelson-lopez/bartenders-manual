@@ -2,13 +2,14 @@ import { useEffect } from "react";
 import axios from "axios";
 
 const useAddCocktail = (cocktail, isClicked, token) => {
+  const proxy = "https://cors-anywhere.herokuapp.com/";
   const url = `http://cocktail-db-production.us-east-1.elasticbeanstalk.com/cocktails`;
 
   useEffect(() => {
     if (isClicked === true)
       axios
         .post(
-          url,
+          proxy + url,
           {
             photo_url: cocktail.photo_url,
             name: cocktail.name,
@@ -29,7 +30,6 @@ const useAddCocktail = (cocktail, isClicked, token) => {
         .catch(err => {
           throw new Error(err);
         });
-    else console.log("waiting for something to happen");
   }, [
     cocktail.description,
     cocktail.directions,

@@ -2,13 +2,14 @@ import { useEffect } from "react";
 import axios from "axios";
 
 const useUpdateCocktail = (cocktail, isClicked, token, id) => {
+  const proxy = "https://cors-anywhere.herokuapp.com/";
   const url = `http://cocktail-db-production.us-east-1.elasticbeanstalk.com/cocktails/${id}/update`;
 
   useEffect(() => {
     if (isClicked === true)
       axios
         .patch(
-          url,
+          proxy + url,
           {
             photo_url: cocktail.photo_url,
             name: cocktail.name,
@@ -29,7 +30,6 @@ const useUpdateCocktail = (cocktail, isClicked, token, id) => {
         .catch(err => {
           throw new Error(err);
         });
-    else console.log("waiting for something to happen");
   }, [
     cocktail.description,
     cocktail.directions,

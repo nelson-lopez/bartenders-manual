@@ -21,6 +21,7 @@ const StyledCocktailList = styled.div`
     font-weigth: bold;
     color: #f5f5f5;
     padding-left: 90px;
+    line-height: initial;
   }
   img {
     width: 366px;
