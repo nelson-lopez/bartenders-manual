@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import StyledAddCocktail from "../component-styles/StyledAddCocktail";
 import useAddCocktail from "../../api/postAddCocktail";
 
 const AddCocktail = () => {
   const [isClicked, setClick] = useState(false);
+  const [redirect, setRedirect] = useState(false);
   const [cocktailInfo, setState] = useState({
     type: "",
     photo_url: "",
@@ -28,10 +30,12 @@ const AddCocktail = () => {
   const submitCocktail = e => {
     e.preventDefault();
     setClick(!isClicked);
+    setRedirect(!redirect);
   };
   useAddCocktail(cocktailInfo, isClicked, token);
   console.log(cocktailInfo);
 
+  if (redirect) return <Redirect to="cocktails" />;
   return (
     <StyledAddCocktail>
       <h2>To continue please:</h2>

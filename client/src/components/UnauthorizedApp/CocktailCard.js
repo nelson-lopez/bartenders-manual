@@ -12,6 +12,7 @@ const CocktailCard = props => {
     return (
       <StyledCocktail>
         <h2>{data.name}</h2>
+
         <img src={data.photo_url} alt="woops" />
         <h3>{data.description}</h3>
         <div className="data-container">

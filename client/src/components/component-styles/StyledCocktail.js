@@ -94,6 +94,19 @@ const StyledCocktail = styled.div`
     font-weight: bold;
     cursor: pointer;
   }
+  .star {
+    padding-top: 20px;
+    color: #fef9f9;
+    height: 27px;
+    width: 65px;
+  }
+
+  .black-star {
+    padding-top: 20px;
+    color: black;
+    height: 27px;
+    width: 65px;
+  }
 `;
 
 export default StyledCocktail;

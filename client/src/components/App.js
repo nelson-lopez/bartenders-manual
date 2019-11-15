@@ -22,6 +22,7 @@ const App = () => {
   const handleSetToken = value => {
     setToken(value);
     const { username } = jwt_decode(value);
+    localStorage.setItem("username", username);
     setUsername(username);
   };
 
