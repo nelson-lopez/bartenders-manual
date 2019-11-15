@@ -100,6 +100,13 @@ const StyledCocktail = styled.div`
     height: 27px;
     width: 65px;
   }
+
+  .black-star {
+    padding-top: 20px;
+    color: black;
+    height: 27px;
+    width: 65px;
+  }
 `;
 
 export default StyledCocktail;

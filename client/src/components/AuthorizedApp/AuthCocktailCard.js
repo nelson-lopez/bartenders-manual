@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import useGetCocktailById from "../../api/getCocktailById";
 import StyledCocktail from "../component-styles/StyledCocktail";
 import useDeleteCocktail from "../../api/deleteCocktailById";
+import useDeleteFavorite from "../../api/deleteUserFavorite";
 import EditCocktail from "../AuthorizedApp/EditCocktail";
 import useGetUser from "../../api/getUser";
 import useAddFavorite from "../../api/patchAddFavorite";
@@ -42,6 +43,8 @@ const CocktailCard = props => {
 
   useAddFavorite(user, id, isFavorite, token);
 
+  useDeleteFavorite(user, id, isFavorite, token);
+
   useEffect(() => {
     if (isClicked === true) {
       setDeleted(!isDeleted);
@@ -77,7 +80,10 @@ const CocktailCard = props => {
           <p onClick={handleOnEdit} className="cocktail-buttons">
             Edit
           </p>
-          <FaStar className="star" onClick={handleOnFavorite} />
+          <FaStar
+            className={isFavorite ? "black-star" : "star"}
+            onClick={handleOnFavorite}
+          />
         </div>
       </StyledCocktail>
     );
