@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
-import StyledList from '../component-styles/StyledList';
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
+import StyledList from "../component-styles/StyledList";
 
 const CocktailCategories = () => {
   const [redirect, setRedirect] = useState(false);
-  const [type, setType] = useState('');
+  const [type, setType] = useState("");
 
   const handleOnClick = e => {
     const type = e.target.alt;
@@ -16,7 +16,7 @@ const CocktailCategories = () => {
     return (
       <Redirect
         to={{
-          pathname: '/cocktail-list',
+          pathname: "/cocktail-list",
           state: { type: type }
         }}
       />

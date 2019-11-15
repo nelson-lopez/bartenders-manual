@@ -4,15 +4,21 @@ import useGetCocktailById from "../../api/getCocktailById";
 import StyledCocktail from "../component-styles/StyledCocktail";
 import useDeleteCocktail from "../../api/deleteCocktailById";
 import EditCocktail from "../AuthorizedApp/EditCocktail";
+import useGetUser from "../../api/getUser";
+import useAddFavorite from "../../api/patchAddFavorite";
+import { FaStar } from "react-icons/fa";
 
 const CocktailCard = props => {
   const [id, setId] = useState(props.location.state.id);
+  const [isFavorite, setFavorite] = useState(false);
   const [isClicked, setClicked] = useState(false);
   const [isDeleted, setDeleted] = useState(false);
   const [back, setBack] = useState(false);
   const [edit, setEdit] = useState(false);
 
   const token = localStorage.getItem("token");
+  const username = localStorage.getItem("username");
+  const user = useGetUser(username, token);
 
   const data = useGetCocktailById(id);
 
@@ -28,7 +34,13 @@ const CocktailCard = props => {
     setBack(!back);
   };
 
+  const handleOnFavorite = () => {
+    setFavorite(!isFavorite);
+  };
+
   useDeleteCocktail(id, isClicked, token);
+
+  useAddFavorite(user, id, isFavorite, token);
 
   useEffect(() => {
     if (isClicked === true) {
@@ -65,6 +77,7 @@ const CocktailCard = props => {
           <p onClick={handleOnEdit} className="cocktail-buttons">
             Edit
           </p>
+          <FaStar className="star" onClick={handleOnFavorite} />
         </div>
       </StyledCocktail>
     );
