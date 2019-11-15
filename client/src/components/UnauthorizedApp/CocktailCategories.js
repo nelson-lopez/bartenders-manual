@@ -34,6 +34,13 @@ const CocktailCategories = () => {
           <p>Stirred</p>
         </div>
         <div className="cocktail-category" onClick={handleOnClick}>
+          <img
+            src="https://chevydetroit.com/wp-content/uploads/2014/09/Dessert-Cocktails.jpg"
+            alt="Dessert Cocktail"
+          />
+          <p>Dessert</p>
+        </div>
+        <div className="cocktail-category" onClick={handleOnClick}>
           <img src="https://imgur.com/kHTje9z.png" alt="Sour" />
           <p>Sour</p>
         </div>
@@ -42,16 +49,15 @@ const CocktailCategories = () => {
           <p>Smash</p>
         </div>
         <div className="cocktail-category" onClick={handleOnClick}>
-          <img src="https://imgur.com/kHTje9z.png" alt="Swizzle" />
+          <img
+            src="https://imbibemagazine.com/wp-content/uploads/2016/02/baker-st-swizzle-vertical-midnight-cowboy-crdt-Jody-Horton-330x450.jpg"
+            alt="Swizzle"
+          />
           <p>Swizzle</p>
         </div>
         <div className="cocktail-category" onClick={handleOnClick}>
           <img src="https://imgur.com/mosU7WR.png" alt="Champagne Cocktail" />
           <p>Champagne</p>
-        </div>
-        <div className="cocktail-category" onClick={handleOnClick}>
-          <img src="https://imgur.com/1PMUcyd.png" alt="Dessert Cocktail" />
-          <p>Dessert</p>
         </div>
       </div>
     </StyledList>
