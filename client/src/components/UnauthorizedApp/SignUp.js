@@ -9,7 +9,6 @@ const SignUp = () => {
     password: ""
   });
 
-  console.log(input);
   const [userData, setData] = useState({
     username: "",
     password: ""

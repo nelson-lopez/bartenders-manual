@@ -2,16 +2,16 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const useGetFavorites = (token, username) => {
+  const proxy = "https://cors-anywhere.herokuapp.com/";
   const url =
     "http://cocktail-db-production.us-east-1.elasticbeanstalk.com/auth/find";
   const [data, setData] = useState(null);
 
-  console.log(data);
   useEffect(() => {
     if (token && username) {
       axios
         .post(
-          url,
+          proxy + url,
           {
             username
           },

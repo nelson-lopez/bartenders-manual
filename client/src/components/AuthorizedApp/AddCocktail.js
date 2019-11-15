@@ -16,7 +16,6 @@ const AddCocktail = () => {
   });
 
   const token = localStorage.getItem("token");
-  console.log(token);
 
   const onInput = e => {
     const key = e.target.name;
@@ -33,7 +32,6 @@ const AddCocktail = () => {
     setRedirect(!redirect);
   };
   useAddCocktail(cocktailInfo, isClicked, token);
-  console.log(cocktailInfo);
 
   if (redirect) return <Redirect to="cocktails" />;
   return (

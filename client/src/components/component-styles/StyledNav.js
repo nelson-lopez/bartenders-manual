@@ -20,6 +20,9 @@ const StyledNav = styled.div`
     text-decoration: none;
     color: inherit;
   }
+  a:hover {
+    text-decoration: underline;
+  }
   h2 {
     text-align: center;
     color: #9e1e59;

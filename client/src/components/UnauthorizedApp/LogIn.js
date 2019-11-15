@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import useUserLogin from "../../api/postUserLogIn";
 import InputBox from "./InputBox";
+import { Redirect } from "react-router-dom";
 
 export default function LogIn({ handleSetToken }) {
+  const [redirect, setRedirect] = useState(false);
   const [input, setInput] = useState({
     username: "",
     password: ""
   });
 
-  console.log(handleSetToken);
   const [userData, setData] = useState({
     username: "",
     password: ""
@@ -20,6 +21,7 @@ export default function LogIn({ handleSetToken }) {
       username: input.username,
       password: input.password
     });
+    setRedirect(!redirect);
   };
 
   const token = useUserLogin(userData.username, userData.password);
@@ -36,6 +38,7 @@ export default function LogIn({ handleSetToken }) {
       [key]: value
     }));
   };
+  if (redirect && token) return <Redirect to="/" />;
   return (
     <div>
       <InputBox

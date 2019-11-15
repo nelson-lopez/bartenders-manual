@@ -18,6 +18,7 @@ const StyledCocktail = styled.div`
     font-weight: bold;
     text-align: left;
     color: #f5efef;
+    line-height: initial;
   }
   h3 {
     font-weight: bold;
@@ -48,6 +49,7 @@ const StyledCocktail = styled.div`
   .data-container {
     display: flex;
     flex-direction: row;
+    padding-bottom: 5em;
   }
   .ingredients-container {
     display: flex;
@@ -85,6 +87,8 @@ const StyledCocktail = styled.div`
   }
   .buttons-container {
     display: flex;
+    padding-top: 5em;
+    padding-bottom: 5em;
   }
   .cocktail-buttons {
     width: 125px;

@@ -16,7 +16,7 @@ const FavoritesList = ({ username }) => {
   };
 
   const data = useGetFavorites(token, username);
-  console.log(data);
+
   if (redirect)
     return (
       <Redirect
@@ -29,7 +29,7 @@ const FavoritesList = ({ username }) => {
   else if (data)
     return (
       <StyledList>
-        <h2>Cocktails</h2>
+        <h2>Favorites</h2>
         <div className="container">
           {data.map(cocktail => {
             return (

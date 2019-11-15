@@ -12,6 +12,7 @@ import { FaStar } from "react-icons/fa";
 const CocktailCard = props => {
   const [id, setId] = useState(props.location.state.id);
   const [isFavorite, setFavorite] = useState(false);
+  const [removeFavorite, setRemove] = useState(false);
   const [isClicked, setClicked] = useState(false);
   const [isDeleted, setDeleted] = useState(false);
   const [back, setBack] = useState(false);
@@ -39,11 +40,15 @@ const CocktailCard = props => {
     setFavorite(!isFavorite);
   };
 
+  const handleOnRemove = () => {
+    setRemove(!removeFavorite);
+  };
+
   useDeleteCocktail(id, isClicked, token);
 
   useAddFavorite(user, id, isFavorite, token);
 
-  useDeleteFavorite(user, id, isFavorite, token);
+  useDeleteFavorite(user, id, removeFavorite, token);
 
   useEffect(() => {
     if (isClicked === true) {
@@ -82,7 +87,7 @@ const CocktailCard = props => {
           </p>
           <FaStar
             className={isFavorite ? "black-star" : "star"}
-            onClick={handleOnFavorite}
+            onClick={isFavorite ? handleOnRemove : handleOnFavorite}
           />
         </div>
       </StyledCocktail>
