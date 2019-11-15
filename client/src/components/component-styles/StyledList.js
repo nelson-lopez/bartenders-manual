@@ -32,7 +32,7 @@ const StyledCocktailList = styled.div`
     font-size: 18px;
     line-height: 20px;
     font-weigth: bold;
-    color: #2f3a60;
+    color: #4b73ff;
     font-weight: bold;
     cursor: pointer;
   }
