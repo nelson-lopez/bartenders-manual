@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { Logger } from '@nestjs/common';
 import { AppModule } from './app.module';
 import * as config from 'config';
+import * as compression from 'compression';
 
 async function bootstrap() {
   const serverConfig = config.get('server');
@@ -13,6 +14,7 @@ async function bootstrap() {
     methods: 'GET,HEAD,PUT,PATCH,POST,DELTE,OPTIONS',
     credentials: true,
   });
+  app.use(compression());
   const port = process.env.PORT || serverConfig.port;
   await app.listen(port);
 
