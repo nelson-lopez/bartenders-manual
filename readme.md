@@ -1,20 +1,25 @@
 # Nelsons Bartending Manual
+
 ### client:
+
 https://client.devnelsonlopez.now.sh/
+
 ### server:
-http://cocktail-db-production.us-east-1.elasticbeanstalk.com/cocktails
+
+http://cocktail-db-production.us-east-1.elasticbeanstalk.com/api/
+
 ## Project Schedule
 
-| Day   | Deliverable                             | Status     |
-| ----- | --------------------------------------- | ---------- |
-| Day 1 | Scaffolding REST Backend                | Done       |
-| Day 2 | Functioning Crud                        | Done       |
-| Day 3 | Stretch goal Auth/ Scaffolding Frontend | Done       |
-| Day 4 | Rendering Frontend functionality        | Done       |
-| Day 5 | Styling Frontend                        | Done       |
-| Day 6 | Deployment                              | Done       |
-| Day 7 | Auth Front-end                          | Done       |
-| Day 8 | Present                                 | Incomplete |
+| Day   | Deliverable                             | Status |
+| ----- | --------------------------------------- | ------ |
+| Day 1 | Scaffolding REST Backend                | Done   |
+| Day 2 | Functioning Crud                        | Done   |
+| Day 3 | Stretch goal Auth/ Scaffolding Frontend | Done   |
+| Day 4 | Rendering Frontend functionality        | Done   |
+| Day 5 | Styling Frontend                        | Done   |
+| Day 6 | Deployment                              | Done   |
+| Day 7 | Auth Front-end                          | Done   |
+| Day 8 | Present                                 | Done   |
 
 ## Project Description
 
