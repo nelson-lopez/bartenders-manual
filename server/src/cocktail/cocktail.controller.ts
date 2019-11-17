@@ -9,6 +9,8 @@ import {
   Delete,
   UseGuards,
   Logger,
+  UseInterceptors,
+  CacheInterceptor,
 } from '@nestjs/common';
 import { CocktailService } from './cocktail.service';
 import { CreateCocktailDto } from './dto/createCocktail.dto';
@@ -26,11 +28,13 @@ export class CocktailController {
   constructor(private cocktailService: CocktailService) {}
 
   @Get()
+  @UseInterceptors(CacheInterceptor)
   getCocktail() {
     return this.cocktailService.getCocktails();
   }
 
   @Get('/:id')
+  @UseInterceptors(CacheInterceptor)
   getCocktailById(@Param('id', ParseIntPipe) id: number): Promise<Cocktail> {
     return this.cocktailService.getCocktailById(id);
   }
