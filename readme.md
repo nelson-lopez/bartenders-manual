@@ -1,10 +1,10 @@
 # Nelsons Bartending Manual
 
-### client:
+### Client:
 
 https://client.devnelsonlopez.now.sh/
 
-### server:
+### Server:
 
 http://cocktail-db-production.us-east-1.elasticbeanstalk.com/api/
 
