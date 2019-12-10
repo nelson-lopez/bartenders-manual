@@ -1,8 +1,6 @@
 # Nelsons Bartending Manual
 
-### Client:
 
-https://client.devnelsonlopez.now.sh/
 
 ### Server:
 
