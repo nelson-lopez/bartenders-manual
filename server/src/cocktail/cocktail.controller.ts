@@ -11,6 +11,8 @@ import {
   Logger,
   UseInterceptors,
   CacheInterceptor,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { CocktailService } from './cocktail.service';
 import { CreateCocktailDto } from './dto/createCocktail.dto';
@@ -41,6 +43,7 @@ export class CocktailController {
 
   @UseGuards(AuthGuard())
   @Post()
+  @UsePipes(ValidationPipe)
   createCocktail(
     @Body('type', CocktailTypeValidationPipe)
     cocktailType: CocktailType,
@@ -51,6 +54,7 @@ export class CocktailController {
 
   @UseGuards(AuthGuard())
   @Patch('/:id/update')
+  @UsePipes(ValidationPipe)
   updateCocktail(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateCocktailDto: CreateCocktailDto,
