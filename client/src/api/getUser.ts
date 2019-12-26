@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const useGetUser = (username, token) => {
+const useGetUser = (username: string, token: string) => {
   const [user, setUser] = useState(null);
   const proxy = "https://cors-anywhere.herokuapp.com/";
   const url = `http://cocktail-db-production.us-east-1.elasticbeanstalk.com/auth/find`;
