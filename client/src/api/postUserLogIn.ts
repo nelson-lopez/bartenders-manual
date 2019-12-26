@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
-const useUserLogIn = (username, password) => {
-  const [token, setToken] = useState(null);
+const useUserLogIn = (username: string, password: string) => {
+  const [token, setToken] = useState<AxiosResponse | string | null>(null);
   const proxy = "https://cors-anywhere.herokuapp.com/";
   const url =
     "http://cocktail-db-production.us-east-1.elasticbeanstalk.com/auth/signin";
 
   useEffect(() => {
-    if ((username, password)) {
+    if (password) {
       axios
         .post(proxy + url, {
           username: username,
           password: password
         })
-        .then(response => {
+        .then((response): void => {
           setToken(response);
         })
         .catch(error => {

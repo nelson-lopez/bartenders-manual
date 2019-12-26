@@ -1,7 +1,12 @@
 import axios from "axios";
 import { useEffect } from "react";
 
-const useAddFavorite = (userId, cocktailId, isFavorite, token) => {
+const useAddFavorite = (
+  userId: number,
+  cocktailId: number,
+  isFavorite: boolean,
+  token: string
+) => {
   const proxy = "https://cors-anywhere.herokuapp.com/";
   const url = `http://cocktail-db-production.us-east-1.elasticbeanstalk.com/auth/${userId}/add`;
 

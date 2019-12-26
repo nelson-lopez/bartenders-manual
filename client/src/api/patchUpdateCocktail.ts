@@ -1,7 +1,13 @@
 import { useEffect } from "react";
 import axios from "axios";
+import { Cocktail } from "../types/cocktail.interface";
 
-const useUpdateCocktail = (cocktail, isClicked, token, id) => {
+const useUpdateCocktail = (
+  cocktail: Cocktail,
+  isClicked: boolean,
+  token: string,
+  id: number
+) => {
   const proxy = "https://cors-anywhere.herokuapp.com/";
   const url = `http://cocktail-db-production.us-east-1.elasticbeanstalk.com/cocktails/${id}/update`;
 
