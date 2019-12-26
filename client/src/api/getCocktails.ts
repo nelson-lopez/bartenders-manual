@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const useGetCocktails = type => {
+const useGetCocktails = (type: string) => {
   const proxy = "https://cors-anywhere.herokuapp.com/";
   const url =
     "http://cocktail-db-production.us-east-1.elasticbeanstalk.com/cocktails";

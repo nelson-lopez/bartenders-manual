@@ -4,7 +4,7 @@ import useGetCocktailById from "../../api/getCocktailById";
 import StyledCocktail from "../component-styles/StyledCocktail";
 import useDeleteCocktail from "../../api/deleteCocktailById";
 import useDeleteFavorite from "../../api/deleteUserFavorite";
-import EditCocktail from "../AuthorizedApp/EditCocktail";
+import EditCocktail from "./EditCocktail";
 import useGetUser from "../../api/getUser";
 import useAddFavorite from "../../api/patchAddFavorite";
 import { FaStar } from "react-icons/fa";
