@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import useGetCocktailById from "../../api/getCocktailById";
 import StyledCocktail from "../component-styles/StyledCocktail";
-import useDeleteCocktail from "../../api/deleteCocktailById";
-import useDeleteFavorite from "../../api/deleteUserFavorite";
 import EditCocktail from "./EditCocktail";
-
-import useAddFavorite from "../../api/patchAddFavorite";
 import { FaStar } from "react-icons/fa";
 import getUser from "../../api/getUser";
 import Axios from "axios";
+import { patchFavorite } from "../../api/patchFavorite";
+import { UserToken } from "../../types/user.interface";
+import deleteFavorite from "../../api/deleteFavorite";
+import { Cocktail } from "../../types/cocktail.interface";
+import getCocktailByID from "../../api/getCocktailById";
 
 /**
  *
@@ -18,6 +18,14 @@ import Axios from "axios";
 
 const CocktailCard = (props: any) => {
   const [id, setId] = useState(props.location.state.id);
+  const [token, setToken] = useState<UserToken | null>(null);
+  const [username, setUsername] = useState<string | null>(null);
+  const [user, setUser] = useState<Promise<number> | null>(null);
+  const [data, setData] = useState<Cocktail | null>(null);
+
+  /**
+   * * User interaction
+   */
   const [isFavorite, setFavorite] = useState(false);
   const [removeFavorite, setRemove] = useState(false);
   const [isClicked, setClicked] = useState(false);
@@ -25,15 +33,33 @@ const CocktailCard = (props: any) => {
   const [back, setBack] = useState(false);
   const [edit, setEdit] = useState(false);
 
-  const token = localStorage.getItem("token");
-  const username: string | null = localStorage.getItem("username");
-  if (username && token) {
-    getUser(username, token);
-  }
+  /**
+   * * Initialize component state
+   */
+
+  useEffect(() => {
+    setUsername(localStorage.getItem("username"));
+    setToken(localStorage.getItem("token"));
+  }, []);
+
+  useEffect(() => {
+    if (token && username) {
+      setUser(getUser(username, token));
+    }
+  }, []);
 
   /**
-   * Delete
+   * * Delete
    */
+  const handleOnDelete = () => {
+    setClicked(!isClicked);
+  };
+  useEffect(() => {
+    if (isClicked === true) {
+      setDeleted(!isDeleted);
+    }
+  }, [isClicked, isDeleted]);
+
   useEffect(() => {
     const proxy = "https://cors-anywhere.herokuapp.com/";
     const url = `http://cocktail-db-production.us-east-1.elasticbeanstalk.com/cocktails/${id}`;
@@ -49,18 +75,28 @@ const CocktailCard = (props: any) => {
           throw new Error(err);
         });
   }, [[id, isClicked, token]]);
-
-  const data = useGetCocktailById(id);
-
-  const handleOnDelete = () => {
-    setClicked(!isClicked);
-  };
+  /**
+   * * GET
+   */
 
   useEffect(() => {
-    if (isClicked === true) {
-      setDeleted(!isDeleted);
+    const data = getCocktailByID(id);
+    data.then(res => {
+      setData(res);
+    });
+  }, []);
+
+  /**
+   * * Patch
+   */
+  if (isFavorite && user && token) {
+    patchFavorite(user, id, isFavorite, token);
+  }
+  useEffect(() => {
+    if (removeFavorite) {
+      deleteFavorite(user, id, removeFavorite, token);
     }
-  }, [isClicked, isDeleted]);
+  }, [removeFavorite]);
 
   const handleOnEdit = () => {
     setEdit(!edit);
@@ -77,10 +113,6 @@ const CocktailCard = (props: any) => {
   const handleOnRemove = () => {
     setRemove(!removeFavorite);
   };
-
-  useAddFavorite(user, id, isFavorite, token);
-
-  useDeleteFavorite(user, id, removeFavorite, token);
 
   if (back) return <Redirect to="/cocktails" />;
   if (isDeleted) return <Redirect to="/cocktails" />;
