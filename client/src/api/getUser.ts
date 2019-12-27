@@ -1,30 +1,27 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 
-const useGetUser = (username: string, token: string) => {
-  const [user, setUser] = useState(null);
+const getUser = async (username: string | null, token: string) => {
   const proxy = "https://cors-anywhere.herokuapp.com/";
   const url = `http://cocktail-db-production.us-east-1.elasticbeanstalk.com/auth/find`;
 
-  useEffect(() => {
-    if (username) {
-      axios
-        .post(
-          proxy + url,
-          {
-            username: username
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
+  if (username) {
+    return await axios
+      .post(
+        proxy + url,
+        {
+          username: username
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
           }
-        )
-        .then(response => setUser(response.data[0].id))
-        .catch(error => console.log(error));
-    }
-  }, [token, url, username]);
-  return user;
+        }
+      )
+      .then(response => {
+        return response.data[0].id;
+      })
+      .catch(error => console.log(error));
+  }
 };
 
-export default useGetUser;
+export default getUser;

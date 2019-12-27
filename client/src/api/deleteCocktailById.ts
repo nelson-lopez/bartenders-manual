@@ -13,13 +13,10 @@ const useDeleteCocktail = (id: number, isClicked: boolean, token: string) => {
             Authorization: `Bearer ${token}`
           }
         })
-        .then(response => {
-          console.log(response);
-        })
+        .then(response => {})
         .catch(err => {
           throw new Error(err);
         });
-    else console.log("waiting for something to happen");
   }, [id, isClicked, token, url]);
 };
 

@@ -5,11 +5,18 @@ import StyledCocktail from "../component-styles/StyledCocktail";
 import useDeleteCocktail from "../../api/deleteCocktailById";
 import useDeleteFavorite from "../../api/deleteUserFavorite";
 import EditCocktail from "./EditCocktail";
-import useGetUser from "../../api/getUser";
+
 import useAddFavorite from "../../api/patchAddFavorite";
 import { FaStar } from "react-icons/fa";
+import getUser from "../../api/getUser";
+import Axios from "axios";
 
-const CocktailCard = props => {
+/**
+ *
+ * TODO This whole component needs to be refactored into smaller functions.
+ */
+
+const CocktailCard = (props: any) => {
   const [id, setId] = useState(props.location.state.id);
   const [isFavorite, setFavorite] = useState(false);
   const [removeFavorite, setRemove] = useState(false);
@@ -19,14 +26,41 @@ const CocktailCard = props => {
   const [edit, setEdit] = useState(false);
 
   const token = localStorage.getItem("token");
-  const username = localStorage.getItem("username");
-  const user = useGetUser(username, token);
+  const username: string | null = localStorage.getItem("username");
+  if (username && token) {
+    getUser(username, token);
+  }
+
+  /**
+   * Delete
+   */
+  useEffect(() => {
+    const proxy = "https://cors-anywhere.herokuapp.com/";
+    const url = `http://cocktail-db-production.us-east-1.elasticbeanstalk.com/cocktails/${id}`;
+
+    if (isClicked === true)
+      Axios.delete(proxy + url, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then(response => {})
+        .catch(err => {
+          throw new Error(err);
+        });
+  }, [[id, isClicked, token]]);
 
   const data = useGetCocktailById(id);
 
   const handleOnDelete = () => {
     setClicked(!isClicked);
   };
+
+  useEffect(() => {
+    if (isClicked === true) {
+      setDeleted(!isDeleted);
+    }
+  }, [isClicked, isDeleted]);
 
   const handleOnEdit = () => {
     setEdit(!edit);
@@ -44,17 +78,9 @@ const CocktailCard = props => {
     setRemove(!removeFavorite);
   };
 
-  useDeleteCocktail(id, isClicked, token);
-
   useAddFavorite(user, id, isFavorite, token);
 
   useDeleteFavorite(user, id, removeFavorite, token);
-
-  useEffect(() => {
-    if (isClicked === true) {
-      setDeleted(!isDeleted);
-    }
-  }, [isClicked, isDeleted]);
 
   if (back) return <Redirect to="/cocktails" />;
   if (isDeleted) return <Redirect to="/cocktails" />;
