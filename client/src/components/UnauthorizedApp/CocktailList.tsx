@@ -3,13 +3,13 @@ import StyledList from "../component-styles/StyledList";
 import useGetCocktails from "../../api/getCocktails";
 import { Redirect } from "react-router-dom";
 
-const CocktailList = props => {
-  const [type, setType] = useState(props.location.state.type);
+const CocktailList = (props: any) => {
+  const [type, setType] = useState<string>(props.location.state.type);
   const [redirect, setRedirect] = useState(false);
-  const [id, setId] = useState(0);
+  const [id, setId] = useState<string>("");
 
-  const handleOnClick = e => {
-    const id = e.target.alt;
+  const handleOnClick = (e: React.MouseEvent<HTMLImageElement>) => {
+    const id = e.currentTarget.alt;
     setId(id);
     setRedirect(!redirect);
   };
