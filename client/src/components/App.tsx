@@ -14,17 +14,19 @@ import AppWrapper from "./component-styles/AppWrapper";
 import LogIn from "./UnauthorizedApp/LogIn";
 import Logout from "./AuthorizedApp/Logout";
 import FavoritesList from "./AuthorizedApp/FavoritesList";
-import { UserCredentials } from "../types/user.interface";
+import { UserToken } from "../types/user.interface";
 
 const App = () => {
-  const [token, setToken] = useState<string | null>(null);
+  const [token, setToken] = useState<UserToken | null>(null);
   const [username, setUsername] = useState(null);
 
-  const handleSetToken = (value: string) => {
-    setToken(value);
-    const { username } = jwt_decode(value);
-    localStorage.setItem("username", username);
-    setUsername(username);
+  const handleSetToken = (value: UserToken) => {
+    if (value !== null) {
+      setToken(value);
+      const { username } = jwt_decode(value);
+      localStorage.setItem("username", username);
+      setUsername(username);
+    }
   };
 
   const handleRemoveToken = () => {
@@ -34,7 +36,7 @@ const App = () => {
   if (!token)
     return (
       <AppWrapper>
-        <Nav />
+        <Nav isLoggedIn={false} />
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route exact path="/signup" component={SignUp} />

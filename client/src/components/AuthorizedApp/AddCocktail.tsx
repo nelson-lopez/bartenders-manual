@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import StyledAddCocktail from "../component-styles/StyledAddCocktail";
 import useAddCocktail from "../../api/postAddCocktail";
+import { UserToken } from "../../types/user.interface";
+import postCocktail from "../../api/postAddCocktail";
 
 const AddCocktail = () => {
   const [isClicked, setClick] = useState(false);
@@ -15,23 +17,26 @@ const AddCocktail = () => {
     directions: ""
   });
 
-  const token = localStorage.getItem("token");
+  const token: UserToken | null = localStorage.getItem("token");
 
-  const onInput = e => {
-    const key = e.target.name;
-    const value = e.target.value;
+  if (token) {
+    postCocktail(cocktailInfo, isClicked, token);
+  }
+
+  const onInput = (e: React.FormEvent<HTMLInputElement>) => {
+    const key = e.currentTarget.name;
+    const value = e.currentTarget.value;
     setState(prevState => ({
       ...prevState,
       [key]: value
     }));
   };
 
-  const submitCocktail = e => {
+  const submitCocktail = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     setClick(!isClicked);
     setRedirect(!redirect);
   };
-  useAddCocktail(cocktailInfo, isClicked, token);
 
   if (redirect) return <Redirect to="cocktails" />;
   return (
