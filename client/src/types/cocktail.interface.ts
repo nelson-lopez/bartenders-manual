@@ -5,6 +5,7 @@ export interface Cocktail {
   ingredients: string;
   directions: string;
   type: string;
+  id?: string;
 }
 
 export interface CocktailID {

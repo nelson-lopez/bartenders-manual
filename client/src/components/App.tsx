@@ -14,11 +14,11 @@ import AppWrapper from "./component-styles/AppWrapper";
 import LogIn from "./UnauthorizedApp/LogIn";
 import Logout from "./AuthorizedApp/Logout";
 import FavoritesList from "./AuthorizedApp/FavoritesList";
-import { UserToken } from "../types/user.interface";
+import { UserToken, UserCredentials } from "../types/user.interface";
 
 const App = () => {
   const [token, setToken] = useState<UserToken | null>(null);
-  const [username, setUsername] = useState(null);
+  const [username, setUsername] = useState<string | undefined>(undefined);
 
   const handleSetToken = (value: UserToken) => {
     if (value !== null) {
@@ -29,7 +29,7 @@ const App = () => {
     }
   };
 
-  const handleRemoveToken = () => {
+  const handleRemoveToken = (): void => {
     setToken(null);
   };
 

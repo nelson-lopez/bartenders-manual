@@ -1,21 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import StyledList from "../component-styles/StyledList";
-import useGetFavorites from "../../api/getFavoriteCocktail";
 import { Redirect } from "react-router-dom";
+import { UserCredentials } from "../../types/user.interface";
+import getFavorites from "../../api/getFavorites";
+import { Cocktail } from "../../types/cocktail.interface";
 
-const FavoritesList = ({ username }) => {
+const FavoritesList = (props: UserCredentials) => {
   const [redirect, setRedirect] = useState(false);
-  const [id, setId] = useState(0);
+  const [token, setToken] = useState<string | null>(null);
+  const [data, setData] = useState<Cocktail[] | null>(null);
+  const [id, setId] = useState<string | undefined>(undefined);
 
-  const token = localStorage.getItem("token");
+  useEffect(() => {
+    setToken(localStorage.getItem("token"));
+  }, []);
 
-  const handleOnClick = e => {
-    const id = e.target.alt;
+  const handleOnClick = (e: React.MouseEvent<HTMLInputElement>) => {
+    const id = e.currentTarget.alt;
     setId(id);
     setRedirect(!redirect);
   };
 
-  const data = useGetFavorites(token, username);
+  useEffect(() => {
+    const data = getFavorites(token, props.username);
+    data.then(res => {
+      setData(res);
+    });
+  });
 
   if (redirect)
     return (
