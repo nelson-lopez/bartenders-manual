@@ -14,26 +14,29 @@ import AppWrapper from "./component-styles/AppWrapper";
 import LogIn from "./UnauthorizedApp/LogIn";
 import Logout from "./AuthorizedApp/Logout";
 import FavoritesList from "./AuthorizedApp/FavoritesList";
+import { UserToken, UserCredentials } from "../types/user.interface";
 
 const App = () => {
-  const [token, setToken] = useState(null);
-  const [username, setUsername] = useState(null);
+  const [token, setToken] = useState<UserToken | null>(null);
+  const [username, setUsername] = useState<string | undefined>(undefined);
 
-  const handleSetToken = value => {
-    setToken(value);
-    const { username } = jwt_decode(value);
-    localStorage.setItem("username", username);
-    setUsername(username);
+  const handleSetToken = (value: UserToken) => {
+    if (value !== null) {
+      setToken(value);
+      const { username } = jwt_decode(value);
+      localStorage.setItem("username", username);
+      setUsername(username);
+    }
   };
 
-  const handleRemoveToken = () => {
+  const handleRemoveToken = (): void => {
     setToken(null);
   };
 
   if (!token)
     return (
       <AppWrapper>
-        <Nav />
+        <Nav isLoggedIn={false} />
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route exact path="/signup" component={SignUp} />
