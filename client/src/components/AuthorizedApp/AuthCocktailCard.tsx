@@ -17,7 +17,7 @@ import getCocktailByID from "../../api/getCocktailById";
  */
 
 const CocktailCard = (props: any) => {
-  const [id, setId] = useState(props.location.state.id);
+  const [id, setId] = useState<number>(props.location.state.id);
   const [token, setToken] = useState<UserToken | null>(null);
   const [username, setUsername] = useState<string | null>(null);
   const [user, setUser] = useState<Promise<number> | null>(null);

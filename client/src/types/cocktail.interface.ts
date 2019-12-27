@@ -6,3 +6,7 @@ export interface Cocktail {
   directions: string;
   type: string;
 }
+
+export interface CocktailID {
+  id: number;
+}

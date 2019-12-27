@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import StyledAddCocktail from "../component-styles/StyledAddCocktail";
-import useUpdateCocktail from "../../api/patchUpdateCocktail";
+import { CocktailID } from "../../types/cocktail.interface";
+import updateCocktail from "../../api/patchUpdateCocktail";
 
-const EditCocktail = ({ id }) => {
+const EditCocktail = (props: CocktailID) => {
   const [isClicked, setClick] = useState(false);
+  const [token, setToken] = useState<string | null>(null);
   const [cocktailInfo, setState] = useState({
     type: "",
     photo_url: "",
@@ -13,22 +15,27 @@ const EditCocktail = ({ id }) => {
     directions: ""
   });
 
-  const token = localStorage.getItem("token");
+  useEffect(() => {
+    setToken(localStorage.getItem("token"));
+  }, []);
 
-  const onInput = e => {
-    const key = e.target.name;
-    const value = e.target.value;
+  useEffect(() => {
+    updateCocktail(cocktailInfo, isClicked, token, props.id);
+  }, [isClicked]);
+
+  const onInput = (e: React.FormEvent<HTMLInputElement>) => {
+    const key = e.currentTarget.name;
+    const value = e.currentTarget.value;
     setState(prevState => ({
       ...prevState,
       [key]: value
     }));
   };
 
-  const submitCocktail = e => {
+  const submitCocktail = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     setClick(!isClicked);
   };
-  useUpdateCocktail(cocktailInfo, isClicked, token, id);
 
   return (
     <StyledAddCocktail>
