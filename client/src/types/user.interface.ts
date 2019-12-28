@@ -1,6 +1,5 @@
 export interface UserCredentials {
   username?: string;
   password?: string;
+  isLoggedIn?: boolean;
 }
-
-export type UserToken = string;

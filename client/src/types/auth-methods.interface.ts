@@ -7,3 +7,7 @@ export interface UserInput {
   handleSubmit(e: React.FormEvent<HTMLFormElement>): void;
   type: string;
 }
+
+export interface Login {
+  handleSetToken(token: string | null): void;
+}

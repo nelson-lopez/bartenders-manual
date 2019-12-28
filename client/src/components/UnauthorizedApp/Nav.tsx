@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import StyledNav from "../component-styles/StyledNav";
+import { UserCredentials } from "../../types/user.interface";
 
-const Nav = ({ isLoggedIn }) => {
-  if (!isLoggedIn)
+const Nav = (props: UserCredentials) => {
+  if (!props.isLoggedIn)
     return (
       <StyledNav>
         <h2>Nelson's Bartending Manual</h2>

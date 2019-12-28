@@ -14,13 +14,12 @@ import AppWrapper from "./component-styles/AppWrapper";
 import LogIn from "./UnauthorizedApp/LogIn";
 import Logout from "./AuthorizedApp/Logout";
 import FavoritesList from "./AuthorizedApp/FavoritesList";
-import { UserToken, UserCredentials } from "../types/user.interface";
 
 const App = () => {
-  const [token, setToken] = useState<UserToken | null>(null);
+  const [token, setToken] = useState<string | null>(null);
   const [username, setUsername] = useState<string | undefined>(undefined);
 
-  const handleSetToken = (value: UserToken) => {
+  const handleSetToken = (value: string) => {
     if (value !== null) {
       setToken(value);
       const { username } = jwt_decode(value);
