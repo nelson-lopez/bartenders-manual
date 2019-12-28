@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:11.5
+    restart: always
+    ports:
+      - 54320:5432
+    networks:
+      - cocktail-network
+    environment:
+      POSTGRES_PASSWORD: "postgres"
+    volumes:
+      - ./devdb/1-init.sql:/docker-entrypoint-initdb.d/1-init.sql
+
+  api:
+    container_name: server
+    build: ./.
+    ports:
+      - 3001:3001
+    networks:
+      - cocktail-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "dev-test@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "password"
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    networks:
+      - cocktail-network
+
+networks:
+  cocktail-network:
+    driver: bridge
+
+volumes:
+  database_data:
+    driver: local
