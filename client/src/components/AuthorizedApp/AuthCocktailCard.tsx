@@ -6,7 +6,6 @@ import { FaStar } from "react-icons/fa";
 import getUser from "../../api/getUser";
 import Axios from "axios";
 import { patchFavorite } from "../../api/patchFavorite";
-import { UserToken } from "../../types/user.interface";
 import deleteFavorite from "../../api/deleteFavorite";
 import { Cocktail } from "../../types/cocktail.interface";
 import getCocktailByID from "../../api/getCocktailById";
@@ -18,7 +17,7 @@ import getCocktailByID from "../../api/getCocktailById";
 
 const CocktailCard = (props: any) => {
   const [id, setId] = useState<number>(props.location.state.id);
-  const [token, setToken] = useState<UserToken | null>(null);
+  const [token, setToken] = useState<string | null>(null);
   const [username, setUsername] = useState<string | null>(null);
   const [user, setUser] = useState<Promise<number> | null>(null);
   const [data, setData] = useState<Cocktail | null>(null);

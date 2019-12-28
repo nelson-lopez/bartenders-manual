@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import useUserLogin from "../../api/postUserLogIn";
 import InputBox from "./InputBox";
 import { Redirect } from "react-router-dom";
+import { Login } from "../../types/auth-methods.interface";
 
-export default function LogIn({ handleSetToken }) {
+export default function LogIn(props: Login) {
   const [redirect, setRedirect] = useState(false);
   const [input, setInput] = useState({
     username: "",
@@ -15,7 +16,7 @@ export default function LogIn({ handleSetToken }) {
     password: ""
   });
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setData({
       username: input.username,
@@ -28,11 +29,11 @@ export default function LogIn({ handleSetToken }) {
   if (token && token.data.accessToken) {
     localStorage.setItem("token", token.data.accessToken);
     const jwt = localStorage.getItem("token");
-    handleSetToken(jwt);
+    props.handleSetToken(jwt);
   }
-  const handleOnInput = e => {
-    const key = e.target.className;
-    const value = e.target.value;
+  const handleOnInput = (e: React.FormEvent<HTMLInputElement>) => {
+    const key = e.currentTarget.className;
+    const value = e.currentTarget.value;
     setInput(prevState => ({
       ...prevState,
       [key]: value

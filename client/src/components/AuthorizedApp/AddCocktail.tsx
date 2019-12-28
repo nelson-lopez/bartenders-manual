@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import StyledAddCocktail from "../component-styles/StyledAddCocktail";
-import useAddCocktail from "../../api/postAddCocktail";
-import { UserToken } from "../../types/user.interface";
 import postCocktail from "../../api/postAddCocktail";
 
 const AddCocktail = () => {
@@ -17,7 +15,7 @@ const AddCocktail = () => {
     directions: ""
   });
 
-  const token: UserToken | null = localStorage.getItem("token");
+  const token: string | null = localStorage.getItem("token");
 
   if (token) {
     postCocktail(cocktailInfo, isClicked, token);
