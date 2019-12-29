@@ -5,14 +5,12 @@ const getFavorites = async (
   token: string | null,
   username: string | undefined
 ): Promise<Cocktail[]> => {
-  const proxy = "https://cors-anywhere.herokuapp.com/";
-  const url =
-    "http://cocktail-db-production.us-east-1.elasticbeanstalk.com/auth/find";
+  const url = "http://localhost:3001/auth/find";
 
   let cocktails = null;
   if (token && username) {
     cocktails = await Axios.post(
-      proxy + url,
+      url,
       {
         username
       },

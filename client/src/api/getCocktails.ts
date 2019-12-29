@@ -3,14 +3,12 @@ import axios from "axios";
 import { Cocktail } from "../types/cocktail.interface";
 
 const useGetCocktails = (type: string) => {
-  const proxy = "https://cors-anywhere.herokuapp.com/";
-  const url =
-    "http://cocktail-db-production.us-east-1.elasticbeanstalk.com/cocktails";
+  const url = "http://localhost:3001/cocktails";
   const [data, setData] = useState<Cocktail[] | null>(null);
 
   useEffect(() => {
     axios
-      .get(proxy + url)
+      .get(url)
       .then(response => {
         setData(
           response.data.filter((cocktail: Cocktail) => cocktail.type === type)

@@ -6,13 +6,12 @@ const deleteFavorite = (
   removeFavorite: boolean,
   token: string | null
 ) => {
-  const proxy = "https://cors-anywhere.herokuapp.com/";
-  const url = `http://cocktail-db-production.us-east-1.elasticbeanstalk.com/auth/${userId}/delete`;
+  const url = `http://localhost:3001/auth/${userId}/delete`;
 
   if (removeFavorite) {
     axios
       .patch(
-        proxy + url,
+        url,
         {
           cocktailId: cocktailId
         },

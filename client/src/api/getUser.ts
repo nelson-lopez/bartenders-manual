@@ -4,13 +4,12 @@ const getUser = async (
   username: string | null,
   token: string
 ): Promise<number> => {
-  const proxy = "https://cors-anywhere.herokuapp.com/";
-  const url = `http://cocktail-db-production.us-east-1.elasticbeanstalk.com/auth/find`;
+  const url = `http://localhost:3001/auth/find`;
 
   let userId = null;
   if (username) {
     userId = await Axios.post(
-      proxy + url,
+      url,
       {
         username: username
       },
