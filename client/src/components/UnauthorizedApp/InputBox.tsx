@@ -1,18 +1,19 @@
 import React from "react";
 import StyledSignUp from "../component-styles/StyledSignUp";
+import { UserInput } from "../../types/auth-methods.interface";
 
-const InputBox = ({ handleOnInput, handleSubmit, type }) => {
-  const onInput = e => {
-    handleOnInput(e);
+const InputBox = (props: UserInput) => {
+  const onInput = (e: React.FormEvent<HTMLInputElement>) => {
+    props.handleOnInput(e);
   };
 
-  const onSubmit = e => {
-    handleSubmit(e);
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    props.handleSubmit(e);
   };
 
   return (
     <StyledSignUp>
-      <h2>To continue please {type}:</h2>
+      <h2>To continue please {props.type}:</h2>
       <div className="login-container">
         <form onSubmit={onSubmit}>
           <div>

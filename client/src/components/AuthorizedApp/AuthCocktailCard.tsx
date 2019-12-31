@@ -1,16 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import useGetCocktailById from "../../api/getCocktailById";
 import StyledCocktail from "../component-styles/StyledCocktail";
-import useDeleteCocktail from "../../api/deleteCocktailById";
-import useDeleteFavorite from "../../api/deleteUserFavorite";
-import EditCocktail from "../AuthorizedApp/EditCocktail";
-import useGetUser from "../../api/getUser";
-import useAddFavorite from "../../api/patchAddFavorite";
+import EditCocktail from "./EditCocktail";
 import { FaStar } from "react-icons/fa";
+import getUser from "../../api/getUser";
+import Axios from "axios";
+import { patchFavorite } from "../../api/patchFavorite";
+import deleteFavorite from "../../api/deleteFavorite";
+import { Cocktail } from "../../types/cocktail.interface";
+import getCocktailByID from "../../api/getCocktailById";
 
-const CocktailCard = props => {
-  const [id, setId] = useState(props.location.state.id);
+/**
+ *
+ * TODO This whole component needs to be refactored into smaller functions.
+ */
+
+const CocktailCard = (props: any) => {
+  const [id, setId] = useState<number>(props.location.state.id);
+  const [token, setToken] = useState<string | null>(null);
+  const [username, setUsername] = useState<string | null>(null);
+  const [user, setUser] = useState<Promise<number> | null>(null);
+  const [data, setData] = useState<Cocktail | null>(null);
+
+  /**
+   * * User interaction
+   */
   const [isFavorite, setFavorite] = useState(false);
   const [removeFavorite, setRemove] = useState(false);
   const [isClicked, setClicked] = useState(false);
@@ -18,15 +32,70 @@ const CocktailCard = props => {
   const [back, setBack] = useState(false);
   const [edit, setEdit] = useState(false);
 
-  const token = localStorage.getItem("token");
-  const username = localStorage.getItem("username");
-  const user = useGetUser(username, token);
+  /**
+   * * Initialize component state
+   */
 
-  const data = useGetCocktailById(id);
+  useEffect(() => {
+    setUsername(localStorage.getItem("username"));
+    setToken(localStorage.getItem("token"));
+  }, []);
 
+  useEffect(() => {
+    if (token && username) {
+      setUser(getUser(username, token));
+    }
+  }, []);
+
+  /**
+   * * Delete
+   */
   const handleOnDelete = () => {
     setClicked(!isClicked);
   };
+  useEffect(() => {
+    if (isClicked === true) {
+      setDeleted(!isDeleted);
+    }
+  }, [isClicked, isDeleted]);
+
+  useEffect(() => {
+    const proxy = "https://cors-anywhere.herokuapp.com/";
+    const url = `http://cocktail-db-production.us-east-1.elasticbeanstalk.com/cocktails/${id}`;
+
+    if (isClicked === true)
+      Axios.delete(proxy + url, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then(response => {})
+        .catch(err => {
+          throw new Error(err);
+        });
+  }, [[id, isClicked, token]]);
+  /**
+   * * GET
+   */
+
+  useEffect(() => {
+    const data = getCocktailByID(id);
+    data.then(res => {
+      setData(res);
+    });
+  }, []);
+
+  /**
+   * * Patch
+   */
+  if (isFavorite && user && token) {
+    patchFavorite(user, id, isFavorite, token);
+  }
+  useEffect(() => {
+    if (removeFavorite) {
+      deleteFavorite(user, id, removeFavorite, token);
+    }
+  }, [removeFavorite]);
 
   const handleOnEdit = () => {
     setEdit(!edit);
@@ -43,18 +112,6 @@ const CocktailCard = props => {
   const handleOnRemove = () => {
     setRemove(!removeFavorite);
   };
-
-  useDeleteCocktail(id, isClicked, token);
-
-  useAddFavorite(user, id, isFavorite, token);
-
-  useDeleteFavorite(user, id, removeFavorite, token);
-
-  useEffect(() => {
-    if (isClicked === true) {
-      setDeleted(!isDeleted);
-    }
-  }, [isClicked, isDeleted]);
 
   if (back) return <Redirect to="/cocktails" />;
   if (isDeleted) return <Redirect to="/cocktails" />;

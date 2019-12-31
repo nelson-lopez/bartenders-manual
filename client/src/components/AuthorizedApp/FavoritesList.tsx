@@ -1,20 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import StyledList from "../component-styles/StyledList";
-import useGetCocktails from "../../api/getCocktails";
 import { Redirect } from "react-router-dom";
+import { UserCredentials } from "../../types/user.interface";
+import getFavorites from "../../api/getFavorites";
+import { Cocktail } from "../../types/cocktail.interface";
 
-const CocktailList = props => {
-  const [type, setType] = useState(props.location.state.type);
+const FavoritesList = (props: UserCredentials) => {
   const [redirect, setRedirect] = useState(false);
-  const [id, setId] = useState(0);
+  const [token, setToken] = useState<string | null>(null);
+  const [data, setData] = useState<Cocktail[] | null>(null);
+  const [id, setId] = useState<string | undefined>(undefined);
 
-  const handleOnClick = e => {
-    const id = e.target.alt;
+  useEffect(() => {
+    setToken(localStorage.getItem("token"));
+  }, []);
+
+  const handleOnClick = (e: React.MouseEvent<HTMLInputElement>) => {
+    const id = e.currentTarget.alt;
     setId(id);
     setRedirect(!redirect);
   };
 
-  const data = useGetCocktails(type);
+  useEffect(() => {
+    const data = getFavorites(token, props.username);
+    data.then(res => {
+      setData(res);
+    });
+  });
+
   if (redirect)
     return (
       <Redirect
@@ -27,7 +40,7 @@ const CocktailList = props => {
   else if (data)
     return (
       <StyledList>
-        <h2>{type}</h2>
+        <h2>Favorites</h2>
         <div className="container">
           {data.map(cocktail => {
             return (
@@ -48,4 +61,4 @@ const CocktailList = props => {
   return <div>loading..</div>;
 };
 
-export default CocktailList;
+export default FavoritesList;

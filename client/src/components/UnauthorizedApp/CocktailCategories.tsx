@@ -6,8 +6,8 @@ const CocktailCategories = () => {
   const [redirect, setRedirect] = useState(false);
   const [type, setType] = useState("");
 
-  const handleOnClick = e => {
-    const type = e.target.alt;
+  const handleOnClick = (e: React.MouseEvent<HTMLImageElement>) => {
+    const type = e.currentTarget.alt;
     setType(type);
     setRedirect(!redirect);
   };

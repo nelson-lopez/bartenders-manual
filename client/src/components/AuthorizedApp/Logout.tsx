@@ -1,10 +1,11 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
+import { LogoutMethods } from "../../types/auth-methods.interface";
 
-const Logout = ({ handleRemoveToken }) => {
+const Logout = (props: LogoutMethods) => {
   localStorage.removeItem("token");
   localStorage.removeItem("username");
-  handleRemoveToken();
+  props.handleRemoveToken();
   return <Redirect to="/" />;
 };
 

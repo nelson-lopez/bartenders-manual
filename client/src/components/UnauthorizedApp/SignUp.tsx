@@ -14,7 +14,7 @@ const SignUp = () => {
     password: ""
   });
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setData({
       username: input.username,
@@ -24,9 +24,9 @@ const SignUp = () => {
 
   const isSignedUp = userUserSignup(userData.username, userData.password);
 
-  const handleOnInput = e => {
-    const key = e.target.className;
-    const value = e.target.value;
+  const handleOnInput = (e: React.FormEvent<HTMLInputElement>) => {
+    const key = e.currentTarget.className;
+    const value = e.currentTarget.value;
     setInput(prevState => ({
       ...prevState,
       [key]: value

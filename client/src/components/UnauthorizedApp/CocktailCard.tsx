@@ -1,11 +1,19 @@
-import React, { useState } from "react";
-import useGetCocktailById from "../../api/getCocktailById";
+import React, { useState, useEffect } from "react";
 import StyledCocktail from "../component-styles/StyledCocktail";
+import { Cocktail } from "../../types/cocktail.interface";
+import getCocktailByID from "../../api/getCocktailById";
 
-const CocktailCard = props => {
-  const [id, setId] = useState(props.location.state.id);
+const CocktailCard = (props: any) => {
+  const [id, setId] = useState<number>(props.location.state.id);
+  const [data, setData] = useState<Cocktail | null>(null);
 
-  const data = useGetCocktailById(id);
+  useEffect(() => {
+    if (id) {
+      const newCocktail = getCocktailByID(id);
+
+      newCocktail.then(res => setData(res));
+    }
+  }, []);
 
   if (data)
     return (

@@ -1,22 +1,20 @@
 import React, { useState } from "react";
 import StyledList from "../component-styles/StyledList";
-import useGetFavorites from "../../api/getFavoriteCocktail";
+import useGetCocktails from "../../api/getCocktails";
 import { Redirect } from "react-router-dom";
 
-const FavoritesList = ({ username }) => {
+const CocktailList = (props: any) => {
+  const [type, setType] = useState<string>(props.location.state.type);
   const [redirect, setRedirect] = useState(false);
-  const [id, setId] = useState(0);
+  const [id, setId] = useState<string>("");
 
-  const token = localStorage.getItem("token");
-
-  const handleOnClick = e => {
-    const id = e.target.alt;
+  const handleOnClick = (e: React.MouseEvent<HTMLImageElement>) => {
+    const id = e.currentTarget.alt;
     setId(id);
     setRedirect(!redirect);
   };
 
-  const data = useGetFavorites(token, username);
-
+  const data = useGetCocktails(type);
   if (redirect)
     return (
       <Redirect
@@ -29,7 +27,7 @@ const FavoritesList = ({ username }) => {
   else if (data)
     return (
       <StyledList>
-        <h2>Favorites</h2>
+        <h2>{type}</h2>
         <div className="container">
           {data.map(cocktail => {
             return (
@@ -50,4 +48,4 @@ const FavoritesList = ({ username }) => {
   return <div>loading..</div>;
 };
 
-export default FavoritesList;
+export default CocktailList;
