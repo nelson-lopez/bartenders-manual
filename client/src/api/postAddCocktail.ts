@@ -6,13 +6,12 @@ const postCocktail = (
   isClicked: boolean,
   token: string
 ): void => {
-  const proxy = "https://cors-anywhere.herokuapp.com/";
-  const url = `http://cocktail-db-production.us-east-1.elasticbeanstalk.com/cocktails`;
+  const url = `http://localhost:3001/cocktails`;
 
   if (isClicked) {
     axios
       .post(
-        proxy + url,
+        url,
         {
           photo_url: cocktail.photo_url,
           name: cocktail.name,

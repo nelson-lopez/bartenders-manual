@@ -3,6 +3,9 @@ import userUserSignup from "../../api/postUserSignUp";
 import InputBox from "./InputBox";
 import SuccessfulSignUp from "./SuccessfulSignup";
 
+/**
+ * TODO Refactor business logic and integrate Formik
+ */
 const SignUp = () => {
   const [input, setInput] = useState({
     username: "",

@@ -6,13 +6,12 @@ export const patchFavorite = (
   isFavorite: boolean,
   token: string
 ) => {
-  const proxy = "https://cors-anywhere.herokuapp.com/";
-  const url = `http://cocktail-db-production.us-east-1.elasticbeanstalk.com/auth/${userId}/add`;
+  const url = `http://localhost:3001/auth/${userId}/add`;
 
   if (isFavorite) {
     axios
       .patch(
-        proxy + url,
+        url,
         {
           cocktailId: cocktailId
         },

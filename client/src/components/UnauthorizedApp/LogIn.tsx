@@ -4,6 +4,10 @@ import InputBox from "./InputBox";
 import { Redirect } from "react-router-dom";
 import { Login } from "../../types/auth-methods.interface";
 
+/**
+ *
+ * TODO Refactor to remove business logic from Formik
+ */
 export default function LogIn(props: Login) {
   const [redirect, setRedirect] = useState(false);
   const [input, setInput] = useState({

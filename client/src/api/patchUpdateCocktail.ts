@@ -7,12 +7,11 @@ const updateCocktail = (
   token: string | null,
   id: number
 ) => {
-  const proxy = "https://cors-anywhere.herokuapp.com/";
-  const url = `http://cocktail-db-production.us-east-1.elasticbeanstalk.com/cocktails/${id}/update`;
+  const url = `http://localhost:3001/cocktails/${id}/update`;
   if (isClicked === true)
     axios
       .patch(
-        proxy + url,
+        url,
         {
           photo_url: cocktail.photo_url,
           name: cocktail.name,

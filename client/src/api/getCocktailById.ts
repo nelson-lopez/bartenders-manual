@@ -2,9 +2,8 @@ import Axios from "axios";
 import { Cocktail } from "../types/cocktail.interface";
 
 const getCocktailByID = async (id: number): Promise<Cocktail> => {
-  const proxy = "https://cors-anywhere.herokuapp.com/";
-  const url = `http://cocktail-db-production.us-east-1.elasticbeanstalk.com/cocktails/${id}`;
-  const data: Cocktail = await Axios.get(proxy + url)
+  const url = `http://localhost:3001/cocktails/${id}`;
+  const data: Cocktail = await Axios.get(url)
     .then(response => {
       return response.data;
     })
