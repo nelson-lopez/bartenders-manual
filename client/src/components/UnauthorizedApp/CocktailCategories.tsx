@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import StyledList from "../component-styles/StyledList";
 
 const CocktailCategories = () => {
+  /**
+   * TODO retool this component to send data down to EventList in a different fashion.
+   * ! Call GET at the Cocktail list level
+   */
   const [redirect, setRedirect] = useState(false);
-  const [type, setType] = useState("");
+  const [type, setType] = useState<string | undefined>(undefined);
 
   const handleOnClick = (e: React.MouseEvent<HTMLImageElement>) => {
     const type = e.currentTarget.alt;
+
     setType(type);
+
     setRedirect(!redirect);
   };
 
