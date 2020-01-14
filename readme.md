@@ -45,7 +45,7 @@ Do you have _any_ suggestions? Did I miss out on something you absolutely think 
 
 ## Change log
 
-The change log can be found on the [Releases page](https://github.com/nelson-lopez/dance-everyday/releases).
+The change log can be found on the [Releases page](https://github.com/nelson-lopez/bartenders-manual/releases).
 
 ## Authors and license
 
