@@ -11,11 +11,11 @@ services:
     environment:
       POSTGRES_PASSWORD: "postgres"
     volumes:
-      - ./devdb/1-init.sql:/docker-entrypoint-initdb.d/1-init.sql
+      - ./server/devdb/1-init.sql:/docker-entrypoint-initdb.d/1-init.sql
 
   api:
     container_name: server
-    build: ./.
+    build: ./server/.
     ports:
       - 3001:3001
     networks:
