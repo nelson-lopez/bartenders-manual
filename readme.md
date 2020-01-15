@@ -24,10 +24,13 @@ This project is currently undergoing several changes to both architecture and bu
 
 ### Installation
 
-1. `git clone https://github.com/nelson-lopez/dance-everyday`
-2. `cd dance-everyday`
+1. `git clone https://github.com/nelson-lopez/bartenders-manual`
+2. `cd bartenders-manual`
 3. `docker-compose up`
-4. `open localhost:8080 on your browser`
+4. In an alternate terminal cd into bartenders-manual/client 
+5. `yarn install`
+6. `yarn start`
+
 
 #### PGAdmin4
 
