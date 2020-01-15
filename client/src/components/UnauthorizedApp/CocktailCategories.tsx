@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import StyledList from "../component-styles/StyledList";
+import CocktailList from './CocktailList'
+import dessert from '../../imgs/dessert.jpg'
+import stirred from '../../imgs/stirred.jpeg'
+import sour from '../../imgs/sour.jpeg'
+import smash from '../../imgs/smash.jpeg'
+import swizzle from '../../imgs/swizzle.jpg'
+import champagne from '../../imgs/champagne.jpeg'
 
 const CocktailCategories = () => {
   /**
@@ -8,24 +15,20 @@ const CocktailCategories = () => {
    * ! Call GET at the Cocktail list level
    */
   const [redirect, setRedirect] = useState(false);
-  const [type, setType] = useState<string | undefined>(undefined);
+  const [cocktailType, setCocktailType] = useState('test');
 
-  const handleOnClick = (e: React.MouseEvent<HTMLImageElement>) => {
-    const type = e.currentTarget.alt;
-
-    setType(type);
-
-    setRedirect(!redirect);
+  const handleOnClick = (e: any) => {
+    setCocktailType(e.target.alt);
+    setRedirect(true)
   };
+
+
+
 
   if (redirect)
     return (
-      <Redirect
-        to={{
-          pathname: "/cocktail-list",
-          state: { type: type }
-        }}
-      />
+      <CocktailList cocktailType={cocktailType} />
+
     );
   return (
     <StyledList>
@@ -33,7 +36,7 @@ const CocktailCategories = () => {
       <div className="container">
         <div className="cocktail-category" onClick={handleOnClick}>
           <img
-            src="https://imgur.com/f8zE6QV.png"
+            src={stirred}
             alt="Stirred"
             onClick={handleOnClick}
           />
@@ -41,28 +44,28 @@ const CocktailCategories = () => {
         </div>
         <div className="cocktail-category" onClick={handleOnClick}>
           <img
-            src="https://chevydetroit.com/wp-content/uploads/2014/09/Dessert-Cocktails.jpg"
+            src={dessert}
             alt="Dessert Cocktail"
           />
           <p>Dessert</p>
         </div>
         <div className="cocktail-category" onClick={handleOnClick}>
-          <img src="https://imgur.com/kHTje9z.png" alt="Sour" />
+          <img src={sour} alt="Sour" />
           <p>Sour</p>
         </div>
         <div className="cocktail-category" onClick={handleOnClick}>
-          <img src="https://imgur.com/u21qIgB.png" alt="Smash" />
+          <img src={smash} alt="Smash" />
           <p>Smash</p>
         </div>
         <div className="cocktail-category" onClick={handleOnClick}>
           <img
-            src="https://imbibemagazine.com/wp-content/uploads/2016/02/baker-st-swizzle-vertical-midnight-cowboy-crdt-Jody-Horton-330x450.jpg"
+            src={swizzle}
             alt="Swizzle"
           />
           <p>Swizzle</p>
         </div>
         <div className="cocktail-category" onClick={handleOnClick}>
-          <img src="https://imgur.com/mosU7WR.png" alt="Champagne Cocktail" />
+          <img src={champagne} alt="Champagne Cocktail" />
           <p>Champagne</p>
         </div>
       </div>

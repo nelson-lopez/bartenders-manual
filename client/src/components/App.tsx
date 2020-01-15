@@ -17,7 +17,7 @@ import FavoritesList from "./AuthorizedApp/FavoritesList";
 
 const App = () => {
   const [token, setToken] = useState<string | null>(null);
-  const [username, setUsername] = useState<string | undefined>(undefined);
+  const [user, setUsername] = useState<string | undefined>(undefined);
 
   const handleSetToken = (value: string) => {
     if (value !== null) {
@@ -76,7 +76,7 @@ const App = () => {
         <Route
           exact
           path="/favorites"
-          component={() => <FavoritesList username={username} />}
+          component={() => <FavoritesList username={user} />}
         />
       </Switch>
     </AppWrapper>
