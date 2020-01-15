@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import StyledList from "../component-styles/StyledList";
+import CocktailList from './CocktailList'
 import dessert from '../../imgs/dessert.jpg'
 import stirred from '../../imgs/stirred.jpeg'
 import sour from '../../imgs/sour.jpeg'
@@ -14,24 +15,21 @@ const CocktailCategories = () => {
    * ! Call GET at the Cocktail list level
    */
   const [redirect, setRedirect] = useState(false);
-  const [type, setType] = useState<string | undefined>(undefined);
+  const [cocktailType, setCocktailType] = useState('test');
 
-  const handleOnClick = (e: React.MouseEvent<HTMLImageElement>) => {
-    const type = e.currentTarget.alt;
-
-    setType(type);
-
-    setRedirect(!redirect);
+  const handleOnClick = (e: any) => {
+    console.log(e.target.alt)
+    setCocktailType(e.target.alt);
+    setRedirect(true)
   };
+
+
+
 
   if (redirect)
     return (
-      <Redirect
-        to={{
-          pathname: "/cocktail-list",
-          state: { type: type }
-        }}
-      />
+      <CocktailList cocktailType={cocktailType} />
+
     );
   return (
     <StyledList>
