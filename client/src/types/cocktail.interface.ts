@@ -11,3 +11,5 @@ export interface Cocktail {
 export interface CocktailID {
   id: number;
 }
+
+export type Cocktails = Cocktail[]

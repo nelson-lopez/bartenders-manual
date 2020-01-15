@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import getCocktails from "../../api/getCocktails";
 import StyledList from '../component-styles/StyledList'
+import { Cocktails } from '../../types/cocktail.interface';
 
 const CocktailList = (props: any) => {
 
-  const [history, setHistory] = useState<null | string>(null)
+  const [data, setData] = useState<Cocktails>()
   const [redirect, setRedirect] = useState(false);
   const [id, setId] = useState<string>("");
 
@@ -14,9 +15,11 @@ const CocktailList = (props: any) => {
   /**
    * * GET cocktails by type
    */
+  useEffect(() => {
+    getCocktails(setData, props.cocktailType)
+  }, [props.cocktailType])
 
-
-
+  console.log(data)
 
   const handleOnClick = (e: React.MouseEvent<HTMLImageElement>) => {
     const id = e.currentTarget.alt;
@@ -36,7 +39,7 @@ const CocktailList = (props: any) => {
   else if (data)
     return (
       <StyledList>
-        <h2>{type}</h2>
+        <h2>{props.cocktailType}</h2>
         <div className="container">
           {data.map(cocktail => {
             return (

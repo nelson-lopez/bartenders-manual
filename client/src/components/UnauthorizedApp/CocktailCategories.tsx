@@ -18,7 +18,6 @@ const CocktailCategories = () => {
   const [cocktailType, setCocktailType] = useState('test');
 
   const handleOnClick = (e: any) => {
-    console.log(e.target.alt)
     setCocktailType(e.target.alt);
     setRedirect(true)
   };
